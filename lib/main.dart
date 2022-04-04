@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:walmart_app_design/colors.dart';
+import 'package:walmart_app_design/home.dart';
 import 'package:walmart_app_design/splash.dart';
 
 void main() {
@@ -13,10 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Walmart',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Container(color: Colors.red),
+      theme: _buildTheme(),
+      home: const HomePage(),
       initialRoute: '/splash',
       onGenerateRoute: _getRoute,
     );
@@ -30,4 +30,13 @@ class MyApp extends StatelessWidget {
       builder: ((context) => const SplashPage(duration: Duration(seconds: 3))),
     );
   }
+}
+
+ThemeData _buildTheme() {
+  final ThemeData base = ThemeData.light();
+  return base.copyWith(
+    colorScheme: base.colorScheme.copyWith(
+      primary: kBlue100,
+    ),
+  );
 }
