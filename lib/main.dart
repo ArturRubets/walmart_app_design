@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:walmart_app_design/colors.dart';
-import 'package:walmart_app_design/home.dart';
+import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/screens/home/home.dart';
 import 'package:walmart_app_design/splash.dart';
 
 void main() {
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       return null;
     }
     return MaterialPageRoute(
-      builder: ((context) => const SplashPage(duration: Duration(seconds: 3))),
+      builder: ((context) => const SplashPage(duration: Duration(seconds: 2))),
     );
   }
 }
@@ -38,5 +38,26 @@ ThemeData _buildTheme() {
     colorScheme: base.colorScheme.copyWith(
       primary: kBlue100,
     ),
+    textTheme: _buildTextTheme(base.textTheme),
   );
+}
+
+TextTheme _buildTextTheme(TextTheme base) {
+  return base
+      .copyWith(
+        headline1: base.headline1!.copyWith(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+        headline2: base.headline2!.copyWith(
+          fontSize: 14,
+        ),
+        bodyText1: base.bodyText1!.copyWith(
+          fontSize: 12,
+        ),
+      )
+      .apply(
+        fontFamily: 'Ambit',
+        displayColor: Colors.white,
+      );
 }

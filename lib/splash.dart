@@ -48,7 +48,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               );
             },
             child: SvgPicture.asset(
-              'assets/logo.svg',
+              'assets/icons/logo.svg',
               semanticsLabel: 'Walmart logo',
               width: 88,
               height: 96,
