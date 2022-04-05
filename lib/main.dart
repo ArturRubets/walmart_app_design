@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/screens/home/home.dart';
-import 'package:walmart_app_design/splash.dart';
+import 'package:walmart_app_design/screens/splash/splash.dart';
 
 void main() {
   runApp(const MyApp());

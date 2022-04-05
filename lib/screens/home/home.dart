@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:walmart_app_design/model/offers_repository.dart';
 import 'package:walmart_app_design/screens/home/components/body.dart';
 import 'package:walmart_app_design/screens/home/components/my_badge.dart';
 
@@ -10,7 +11,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: const Body(),
+      body: Body(offers: OffersRepository.loadOffers()),
     );
   }
 

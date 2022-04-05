@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:walmart_app_design/model/offer.dart';
 
 class CardTopOffer extends StatelessWidget {
+  final Offer offer;
   const CardTopOffer({
     Key? key,
+    required this.offer,
   }) : super(key: key);
 
   @override
@@ -13,7 +16,7 @@ class CardTopOffer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            'assets/images/girls.png',
+            offer.assetPath,
             width: 334,
             height: 190,
           ),
@@ -29,14 +32,14 @@ class CardTopOffer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Free Assembly',
+                        offer.title,
                         style: Theme.of(context)
                             .textTheme
                             .headline1!
                             .copyWith(color: Colors.black),
                       ),
                       Text(
-                        'A new brand that looks good.',
+                        offer.subTitle,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               fontFamily: 'Aeonik',
                               color: const Color(0xFF999999),

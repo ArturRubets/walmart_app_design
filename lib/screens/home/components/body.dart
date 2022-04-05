@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/model/offer.dart';
 import 'package:walmart_app_design/screens/home/components/card_top_offer.dart';
 import 'package:walmart_app_design/screens/home/components/extra_info.dart';
 import 'package:walmart_app_design/screens/home/components/search.dart';
 
 class Body extends StatelessWidget {
+  final List<Offer> offers;
   const Body({
     Key? key,
+    required this.offers,
   }) : super(key: key);
 
   @override
@@ -25,7 +28,16 @@ class Body extends StatelessWidget {
           child: const Search(),
         ),
         const ExtraInfo(),
-        const CardTopOffer(),
+        SizedBox(
+          height: 316,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: List.generate(
+              offers.length,
+              (index) => CardTopOffer(offer: offers[index]),
+            ),
+          ),
+        ),
       ],
     );
   }
