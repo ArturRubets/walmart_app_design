@@ -12,7 +12,7 @@ class ExtraInfo extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            color: kBlue200,
+            color: kBlue300,
             padding: const EdgeInsets.all(8),
             child: Row(
               children: [
@@ -36,7 +36,7 @@ class ExtraInfo extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-            color: kBlue300,
+            color: kBlue400,
             padding: const EdgeInsets.all(8),
             child: Row(
               children: [

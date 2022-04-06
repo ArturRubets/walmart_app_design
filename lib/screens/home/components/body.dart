@@ -3,7 +3,9 @@ import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/model/offer.dart';
 import 'package:walmart_app_design/screens/home/components/card_top_offer.dart';
 import 'package:walmart_app_design/screens/home/components/extra_info.dart';
+import 'package:walmart_app_design/screens/home/components/filter_panel.dart';
 import 'package:walmart_app_design/screens/home/components/search.dart';
+import 'package:walmart_app_design/screens/home/components/track_order/track_order.dart';
 
 class Body extends StatelessWidget {
   final List<Offer> offers;
@@ -18,7 +20,7 @@ class Body extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          color: kBlue100,
+          color: kBlue200,
           padding: const EdgeInsets.only(
             top: 21,
             left: 16,
@@ -38,7 +40,39 @@ class Body extends StatelessWidget {
             ),
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TrackOrder(),
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                FilterPanel(
+                  title: 'Sort & Filter',
+                  leading: Image.asset(
+                    'assets/icons/menu_alt_02.png',
+                    width: 15,
+                    height: 10,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                const FilterPanel(
+                  title: 'In-Store',
+                ),
+                const SizedBox(width: 12),
+                const FilterPanel(
+                  title: 'Price',
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
 }
+

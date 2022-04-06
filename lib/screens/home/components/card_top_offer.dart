@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/model/offer.dart';
 
 class CardTopOffer extends StatelessWidget {
@@ -42,7 +43,7 @@ class CardTopOffer extends StatelessWidget {
                         offer.subTitle,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               fontFamily: 'Aeonik',
-                              color: const Color(0xFF999999),
+                              color: kGrey100,
                             ),
                       ),
                     ],

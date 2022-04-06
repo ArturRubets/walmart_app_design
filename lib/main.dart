@@ -36,7 +36,7 @@ ThemeData _buildTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     colorScheme: base.colorScheme.copyWith(
-      primary: kBlue100,
+      primary: kBlue200,
     ),
     textTheme: _buildTextTheme(base.textTheme),
   );

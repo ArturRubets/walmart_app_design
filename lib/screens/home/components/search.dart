@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:walmart_app_design/constants.dart';
 
 class Search extends StatelessWidget {
   const Search({
@@ -19,7 +20,7 @@ class Search extends StatelessWidget {
         hintStyle: Theme.of(context)
             .textTheme
             .headline2!
-            .copyWith(color: const Color(0xFF999999)),
+            .copyWith(color: kGrey100),
         prefixIcon: Padding(
           padding: const EdgeInsets.only(left: 10),
           child: Image.asset(
