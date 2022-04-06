@@ -63,7 +63,7 @@ class PathOrder extends StatelessWidget {
                   width: 14,
                   height: 14,
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: kWhite,
                     shape: BoxShape.circle,
                   ),
                 ),

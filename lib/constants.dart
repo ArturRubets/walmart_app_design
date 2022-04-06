@@ -10,3 +10,5 @@ const kGrey200 = Color(0xFF999999);
 const kGrey300 = Color(0xFF696E70);
 
 const kBlack600 = Color(0xFF000000);
+
+const kWhite = Color(0xFFFFFFFF);

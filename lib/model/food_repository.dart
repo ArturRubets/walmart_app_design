@@ -4,16 +4,16 @@ class FoodRepository {
   static List<Food> loadFoods() {
     const allFoods = [
       Food(
-        assetPath: 'assets/images/food_line/image 17 (1).png',
+        assetPath: 'assets/images/food_line/image 17.png',
         productName: 'Gala Apples, 3lb Bag',
         note: 'Final cost by weight',
-        pricePerWeight: 4.62,
-        price: 2.27,
+        pricePerWeight: 2.27,
+        price: 4.62,
         isStock: true,
         location: 'S23',
       ),
       Food(
-        assetPath: 'assets/images/food_line/image 17.png',
+        assetPath: 'assets/images/food_line/image 17 (1).png',
         productName: 'Wonder Bread Classic',
         note: 'Wonder',
         pricePerWeight: 11.9,
@@ -65,7 +65,7 @@ class FoodRepository {
         isStock: true,
         location: 'S23',
       ),
-        Food(
+      Food(
         assetPath: 'assets/images/food_line/image 17 (7).png',
         productName: 'Fresh Spinach, 10 oz',
         note: 'Marketside',

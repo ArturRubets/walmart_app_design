@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/model/food_repository.dart';
 import 'package:walmart_app_design/model/offers_repository.dart';
 import 'package:walmart_app_design/screens/home/components/body.dart';
 import 'package:walmart_app_design/screens/home/components/my_badge.dart';
@@ -11,7 +13,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Body(offers: OffersRepository.loadOffers()),
+      body: Body(
+        offers: OffersRepository.loadOffers(),
+        foods: FoodRepository.loadFoods(),
+      ),
     );
   }
 
@@ -48,7 +53,7 @@ class HomePage extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!
-                    .copyWith(color: Colors.white.withOpacity(0.8)),
+                    .copyWith(color: kWhite.withOpacity(0.8)),
               ),
               const SizedBox(width: 20),
               MyBadge(
@@ -60,7 +65,7 @@ class HomePage extends StatelessWidget {
                   'assets/icons/shopping-cart-outline.png',
                   width: 24,
                   height: 24,
-                  color: Colors.white,
+                  color: kWhite,
                 ),
               ),
             ],

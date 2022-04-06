@@ -27,7 +27,7 @@ class ExtraInfo extends StatelessWidget {
                   'Carrollton Supercenter',
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                         fontFamily: 'Aeonik',
-                        color: Colors.white,
+                        color: kWhite,
                       ),
                 ),
               ],
@@ -50,7 +50,7 @@ class ExtraInfo extends StatelessWidget {
                 Text(
                   'Dallas 75220',
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: Colors.white,
+                        color: kWhite,
                         fontFamily: 'Aeonik',
                       ),
                 ),

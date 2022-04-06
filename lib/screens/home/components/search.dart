@@ -14,7 +14,7 @@ class Search extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(100),
         ),
-        fillColor: Colors.white,
+        fillColor: kWhite,
         filled: true,
         hintText: 'Search everything at Walmart',
         hintStyle: Theme.of(context)

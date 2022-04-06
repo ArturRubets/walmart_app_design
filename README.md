@@ -1,6 +1,7 @@
 # walmart_app_design
 
 A new Flutter project.
+Application design: https://www.figma.com/file/tt8r0RQ81DpLkJ8fX4dav7/%F0%9F%9B%8D-Walmart-App-Design-(Community)?node-id=0%3A1
 
 ## Getting Started
 

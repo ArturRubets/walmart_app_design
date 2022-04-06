@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/screens/home/components/track_order/button.dart';
 import 'package:walmart_app_design/screens/home/components/track_order/path_order.dart';
 
 class TrackOrder extends StatelessWidget {
@@ -34,28 +35,13 @@ class TrackOrder extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              width: 81,
-              height: 34,
-              decoration: BoxDecoration(
-                color: kBlue200,
-                borderRadius: BorderRadius.circular(200),
+            Button(
+              image: Image.asset(
+                'assets/icons/location_outline.png',
+                width: 20,
+                height: 20,
               ),
-              child: Row(
-                children: [
-                  const SizedBox(width: 5),
-                  Image.asset(
-                    'assets/icons/location_outline.png',
-                    width: 20,
-                    height: 20,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    'Track',
-                    style: Theme.of(context).textTheme.headline2,
-                  ),
-                ],
-              ),
+              title: 'Track',
             ),
           ],
         ),
