@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/model/food.dart';
 import 'package:walmart_app_design/model/offer.dart';
+import 'package:walmart_app_design/screens/home/components/brands.dart';
 import 'package:walmart_app_design/screens/home/components/card_top_offer.dart';
 import 'package:walmart_app_design/screens/home/components/extra_info.dart';
 import 'package:walmart_app_design/screens/home/components/filter_panels.dart';
@@ -90,6 +91,8 @@ class Body extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
+            const Brands(),
+            const SizedBox(height: 56),
           ],
         ),
       ),
