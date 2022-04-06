@@ -13,67 +13,78 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
-      body: Body(
-        offers: OffersRepository.loadOffers(),
-        foods: FoodRepository.loadFoods(),
-        electronic: ElectronicRepository.loadElectronic(),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: buildAppBar(context),
+            floating: true,
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Body(
+                  offers: OffersRepository.loadOffers(),
+                  foods: FoodRepository.loadFoods(),
+                  electronic: ElectronicRepository.loadElectronic(),
+                );
+              },
+              childCount: 1,
+            ),
+          )
+        ],
       ),
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Image.asset(
-                'assets/icons/avatar.png',
-                width: 32,
-                height: 32,
+  Row buildAppBar(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Image.asset(
+              'assets/icons/avatar.png',
+              width: 32,
+              height: 32,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              'Hi, John',
+              style: Theme.of(context).textTheme.headline2,
+            ),
+          ],
+        ),
+        SvgPicture.asset(
+          'assets/icons/logo.svg',
+          semanticsLabel: 'Walmart logo',
+          width: 36,
+          height: 36,
+        ),
+        Row(
+          children: [
+            Text(
+              '\$499.60',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1!
+                  .copyWith(color: kWhite.withOpacity(0.8)),
+            ),
+            const SizedBox(width: 20),
+            MyBadge(
+              value: "2",
+              top: -6,
+              right: -6,
+              color: const Color(0xFFFCB619),
+              child: Image.asset(
+                'assets/icons/shopping-cart-outline.png',
+                width: 24,
+                height: 24,
+                color: kWhite,
               ),
-              const SizedBox(width: 8),
-              Text(
-                'Hi, John',
-                style: Theme.of(context).textTheme.headline2,
-              ),
-            ],
-          ),
-          SvgPicture.asset(
-            'assets/icons/logo.svg',
-            semanticsLabel: 'Walmart logo',
-            width: 36,
-            height: 36,
-          ),
-          Row(
-            children: [
-              Text(
-                '\$499.60',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(color: kWhite.withOpacity(0.8)),
-              ),
-              const SizedBox(width: 20),
-              MyBadge(
-                value: "2",
-                top: -6,
-                right: -6,
-                color: const Color(0xFFFCB619),
-                child: Image.asset(
-                  'assets/icons/shopping-cart-outline.png',
-                  width: 24,
-                  height: 24,
-                  color: kWhite,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

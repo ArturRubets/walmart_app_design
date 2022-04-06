@@ -27,32 +27,28 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildSearch(),
-            const ExtraInfo(),
-            buildCardsOffers(),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: TrackOrder(),
-            ),
-            const SizedBox(height: 24),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: FilterPanels(),
-            ),
-            const SizedBox(height: 24),
-            ...buildFoodGroseriesSection(),
-            const SizedBox(height: 32),
-            ...buildBrandsSection(),
-            const SizedBox(height: 56),
-            ...buildElectronicsGroseriesSection(),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildSearch(),
+        const ExtraInfo(),
+        buildCardsOffers(),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TrackOrder(),
         ),
-      ),
+        const SizedBox(height: 24),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: FilterPanels(),
+        ),
+        const SizedBox(height: 24),
+        ...buildFoodGroseriesSection(),
+        const SizedBox(height: 32),
+        ...buildBrandsSection(),
+        const SizedBox(height: 56),
+        ...buildElectronicsGroseriesSection(),
+      ],
     );
   }
 

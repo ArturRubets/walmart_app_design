@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scrollBehavior: const ConstantScrollBehavior(),
       debugShowCheckedModeBanner: false,
       title: 'Walmart',
       theme: _buildTheme(),
@@ -60,4 +61,11 @@ TextTheme _buildTextTheme(TextTheme base) {
         fontFamily: 'Ambit',
         displayColor: Colors.white,
       );
+}
+
+class ConstantScrollBehavior extends ScrollBehavior {
+  const ConstantScrollBehavior();
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) =>
+      const ClampingScrollPhysics();
 }
