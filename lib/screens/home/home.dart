@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/model/electronic_repository.dart';
 import 'package:walmart_app_design/model/food_repository.dart';
 import 'package:walmart_app_design/model/offers_repository.dart';
 import 'package:walmart_app_design/screens/home/components/body.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
       body: Body(
         offers: OffersRepository.loadOffers(),
         foods: FoodRepository.loadFoods(),
+        electronic: ElectronicRepository.loadElectronic(),
       ),
     );
   }

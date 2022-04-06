@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
-import 'package:walmart_app_design/model/food.dart';
+import 'package:walmart_app_design/model/electronic.dart';
 import 'package:walmart_app_design/screens/home/components/track_order/button.dart';
 
-class ProductCard extends StatelessWidget {
-  final Food food;
+class ElectronicCard extends StatelessWidget {
+  final Electronic electronic;
+  final double opacityStar = 0.4;
 
-  const ProductCard({
+  const ElectronicCard({
     Key? key,
-    required this.food,
+    required this.electronic,
   }) : super(key: key);
 
   @override
@@ -34,14 +35,14 @@ class ProductCard extends StatelessWidget {
             children: [
               Center(
                 child: Image.asset(
-                  food.assetPath,
+                  electronic.assetPath,
                   width: 126,
                   height: 118,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
-                food.note,
+                electronic.brand,
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1!
@@ -49,7 +50,7 @@ class ProductCard extends StatelessWidget {
               ),
               const SizedBox(height: 2),
               Text(
-                food.productName,
+                electronic.productName,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
@@ -59,10 +60,10 @@ class ProductCard extends StatelessWidget {
               const SizedBox(height: 8),
               RichText(
                 text: TextSpan(
-                  text: '\$${food.price}  ',
+                  text: '\$${electronic.pricePerMonth}/mo  ',
                   children: [
                     TextSpan(
-                      text: '\$${food.pricePerWeight}/lb',
+                      text: '\$${electronic.fullPrice}',
                       style: const TextStyle(color: kGrey100),
                     ),
                   ],
@@ -72,39 +73,45 @@ class ProductCard extends StatelessWidget {
                       .copyWith(color: kBlack600),
                 ),
               ),
-              const Divider(),
+              const Divider(indent: 0, endIndent: 0),
               Row(
                 children: [
-                  if (food.isStock)
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Text(
-                            'In Stock',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          const Spacer(),
-                          const Text('|'),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'assets/icons/location_outline.png',
-                          color: kBlack600,
-                          width: 12,
-                          height: 15,
-                        ),
-                        Text(
-                          food.location,
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ],
-                    ),
+                  Opacity(
+                    opacity: electronic.quantityStars >= 1 ? 1 : opacityStar,
+                    child: Image.asset('assets/icons/Active.png'),
                   ),
+                  Opacity(
+                    opacity: electronic.quantityStars >= 2 ? 1 : opacityStar,
+                    child: Image.asset('assets/icons/Active.png'),
+                  ),
+                  Opacity(
+                    opacity: electronic.quantityStars >= 3 ? 1 : opacityStar,
+                    child: Image.asset('assets/icons/Active.png'),
+                  ),
+                  Opacity(
+                    opacity: electronic.quantityStars >= 4 ? 1 : opacityStar,
+                    child: Image.asset('assets/icons/Active.png'),
+                  ),
+                  Opacity(
+                    opacity: electronic.quantityStars >= 5 ? 1 : opacityStar,
+                    child: Image.asset('assets/icons/Active.png'),
+                  ),
+                  const SizedBox(width: 10),
+                  electronic.rating > 1000
+                      ? Text(
+                          '(${electronic.rating / 1000}k)',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(color: kGrey200),
+                        )
+                      : Text(
+                          '(${electronic.rating})',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(color: kGrey200),
+                        ),
                 ],
               )
             ],
