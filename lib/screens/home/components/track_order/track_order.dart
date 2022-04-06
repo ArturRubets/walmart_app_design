@@ -28,7 +28,7 @@ class TrackOrder extends StatelessWidget {
                 Text(
                   'Arrives today, 3pm – 4pm',
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: kGrey100,
+                        color: kGrey200,
                         fontFamily: 'Aeonik',
                       ),
                 ),

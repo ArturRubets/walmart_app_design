@@ -82,7 +82,7 @@ class PathOrder extends StatelessWidget {
               child: Container(
                 height: 2,
                 decoration: BoxDecoration(
-                  color: kGrey200,
+                  color: kGrey300,
                   borderRadius: BorderRadius.circular(100),
                 ),
               ),
@@ -91,7 +91,7 @@ class PathOrder extends StatelessWidget {
               width: 12,
               height: 12,
               decoration: BoxDecoration(
-                color: kGrey200,
+                color: kGrey300,
                 borderRadius: BorderRadius.circular(100),
               ),
             ),
@@ -100,7 +100,7 @@ class PathOrder extends StatelessWidget {
         const SizedBox(height: 8),
         DefaultTextStyle(
           style:
-              Theme.of(context).textTheme.bodyText1!.copyWith(color: kGrey200),
+              Theme.of(context).textTheme.bodyText1!.copyWith(color: kGrey300),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [

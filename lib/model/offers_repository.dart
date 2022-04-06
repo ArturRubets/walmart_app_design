@@ -4,17 +4,17 @@ class OffersRepository {
   static List<Offer> loadOffers() {
     const allOffers = [
       Offer(
-        assetPath: 'assets/images/girls.png',
+        assetPath: 'assets/images/offer_card/girls.png',
         title: 'Free Assembly',
         subTitle: 'A new brand that looks good.',
       ),
       Offer(
-        assetPath: 'assets/images/sport.png',
+        assetPath: 'assets/images/offer_card/sport.png',
         title: 'Free Assembly',
         subTitle: 'A new brand that looks good.',
       ),
       Offer(
-        assetPath: 'assets/images/cake.png',
+        assetPath: 'assets/images/offer_card/cake.png',
         title: 'Free Assembly',
         subTitle: 'A new brand that looks good.',
       ),

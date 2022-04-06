@@ -4,6 +4,7 @@ import 'package:walmart_app_design/model/offer.dart';
 import 'package:walmart_app_design/screens/home/components/card_top_offer.dart';
 import 'package:walmart_app_design/screens/home/components/extra_info.dart';
 import 'package:walmart_app_design/screens/home/components/filter_panel.dart';
+import 'package:walmart_app_design/screens/home/components/filter_panels.dart';
 import 'package:walmart_app_design/screens/home/components/search.dart';
 import 'package:walmart_app_design/screens/home/components/track_order/track_order.dart';
 
@@ -45,34 +46,36 @@ class Body extends StatelessWidget {
           child: TrackOrder(),
         ),
         const SizedBox(height: 24),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: FilterPanels(),
+        ),
+        const SizedBox(height: 24),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: RichText(
+            text: TextSpan(
               children: [
-                FilterPanel(
-                  title: 'Sort & Filter',
-                  leading: Image.asset(
-                    'assets/icons/menu_alt_02.png',
-                    width: 15,
-                    height: 10,
-                  ),
+                TextSpan(
+                  text: 'Groceries ',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(color: kBlack600),
                 ),
-                const SizedBox(width: 12),
-                const FilterPanel(
-                  title: 'In-Store',
-                ),
-                const SizedBox(width: 12),
-                const FilterPanel(
-                  title: 'Price',
+                TextSpan(
+                  text: '(12.3k)',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline1!
+                      .copyWith(color: kGrey100),
                 ),
               ],
             ),
           ),
         ),
+        const SizedBox(height: 12),
       ],
     );
   }
 }
-

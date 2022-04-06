@@ -43,7 +43,7 @@ class CardTopOffer extends StatelessWidget {
                         offer.subTitle,
                         style: Theme.of(context).textTheme.bodyText1!.copyWith(
                               fontFamily: 'Aeonik',
-                              color: kGrey100,
+                              color: kGrey200,
                             ),
                       ),
                     ],
