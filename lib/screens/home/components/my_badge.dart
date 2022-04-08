@@ -2,22 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:walmart_app_design/main.dart';
 
 class MyBadge extends StatelessWidget {
-  final double top;
-  final double right;
-  final Widget child; // our badge widget will wrap this child widget
-  final Color color; // the  background color of the badge - default is yellow
-
   const MyBadge({
     Key? key,
     required this.child,
     this.color = Colors.yellow,
     required this.top,
     required this.right,
+    required this.itemsInCart,
   }) : super(key: key);
+
+  final double top;
+  final double right;
+  final Widget child; // our badge widget will wrap this child widget
+  final Color color; // the  background color of the badge - default is yellow
+  final int itemsInCart;
 
   @override
   Widget build(BuildContext context) {
-    final itemsInCart = AppStateScope.of(context).itemsInCart.length;
     return Stack(
       alignment: Alignment.center,
       clipBehavior: Clip.none,

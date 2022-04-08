@@ -55,7 +55,7 @@ class ElectronicCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
-                    .headline2!
+                    .headline3!
                     .copyWith(color: kBlack600),
               ),
               const SizedBox(height: 8),
@@ -70,7 +70,7 @@ class ElectronicCard extends StatelessWidget {
                   ],
                   style: Theme.of(context)
                       .textTheme
-                      .headline2!
+                      .headline3!
                       .copyWith(color: kBlack600),
                 ),
               ),
@@ -103,14 +103,14 @@ class ElectronicCard extends StatelessWidget {
                           '(${electronic.rating / 1000}k)',
                           style: Theme.of(context)
                               .textTheme
-                              .headline2!
+                              .headline3!
                               .copyWith(color: kGrey200),
                         )
                       : Text(
                           '(${electronic.rating})',
                           style: Theme.of(context)
                               .textTheme
-                              .headline2!
+                              .headline3!
                               .copyWith(color: kGrey200),
                         ),
                 ],

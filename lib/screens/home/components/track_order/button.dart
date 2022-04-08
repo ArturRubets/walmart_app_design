@@ -30,7 +30,7 @@ class Button extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: Theme.of(context).textTheme.headline2,
+              style: Theme.of(context).textTheme.headline3,
             ),
             flex: 2,
           ),

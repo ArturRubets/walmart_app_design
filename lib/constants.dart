@@ -31,6 +31,9 @@ TextTheme buildTextTheme(TextTheme base) {
           fontWeight: FontWeight.bold,
         ),
         headline2: base.headline2!.copyWith(
+          fontSize: 16,
+        ),
+        headline3: base.headline3!.copyWith(
           fontSize: 14,
         ),
         bodyText1: base.bodyText1!.copyWith(

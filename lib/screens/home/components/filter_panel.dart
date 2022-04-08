@@ -31,7 +31,7 @@ class FilterPanel extends StatelessWidget {
                 title,
                 style: Theme.of(context)
                     .textTheme
-                    .headline2!
+                    .headline3!
                     .copyWith(color: kBlack600),
               ),
               const SizedBox(width: 6),

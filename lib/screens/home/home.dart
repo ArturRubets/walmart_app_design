@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/main.dart';
 import 'package:walmart_app_design/model/offers_repository.dart';
 import 'package:walmart_app_design/screens/cart/cart.dart';
 import 'package:walmart_app_design/screens/home/components/body.dart';
@@ -34,6 +35,7 @@ class HomePage extends StatelessWidget {
   }
 
   Row buildAppBar(BuildContext context) {
+    final itemsInCart = AppStateScope.of(context).itemsInCart.length;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -49,7 +51,7 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: Text(
                   'Hi, John',
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.headline3,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -78,17 +80,21 @@ class HomePage extends StatelessWidget {
               const SizedBox(width: 20),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) => Cart()),
-                    ),
-                  );
+                  if (itemsInCart > 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => const Cart()),
+                      ),
+                    );
+                  }
                 },
+                borderRadius: BorderRadius.circular(20),
                 child: MyBadge(
                   top: -6,
                   right: -6,
                   color: const Color(0xFFFCB619),
+                  itemsInCart: itemsInCart,
                   child: Image.asset(
                     'assets/icons/shopping-cart-outline.png',
                     width: 24,

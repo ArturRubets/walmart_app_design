@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/screens/cart/components/body.dart';
 
 class Cart extends StatelessWidget {
@@ -45,7 +44,7 @@ Row buildAppBar(BuildContext context) {
             Expanded(
               child: Text(
                 'Hi, Artur',
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.headline3,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -70,7 +69,7 @@ Row buildAppBar(BuildContext context) {
               width: 24,
               height: 24,
             ),
-            splashRadius: 16,
+            splashRadius: 18,
           ),
         ),
       ),

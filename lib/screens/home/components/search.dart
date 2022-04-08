@@ -19,7 +19,7 @@ class Search extends StatelessWidget {
         hintText: 'Search everything at Walmart',
         hintStyle: Theme.of(context)
             .textTheme
-            .headline2!
+            .headline3!
             .copyWith(color: kGrey200),
         prefixIcon: Padding(
           padding: const EdgeInsets.only(left: 10),
