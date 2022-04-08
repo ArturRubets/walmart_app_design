@@ -63,7 +63,7 @@ class ElectronicCard extends StatelessWidget {
                   text: '\$${electronic.pricePerMonth}/mo  ',
                   children: [
                     TextSpan(
-                      text: '\$${electronic.fullPrice}',
+                      text: '\$${electronic.price}',
                       style: const TextStyle(color: kGrey100),
                     ),
                   ],

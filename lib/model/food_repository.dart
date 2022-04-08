@@ -4,6 +4,7 @@ class FoodRepository {
   static List<Food> loadFoods() {
     const allFoods = [
       Food(
+        id: 0,
         assetPath: 'assets/images/food_line/image 17.png',
         productName: 'Gala Apples, 3lb Bag',
         note: 'Final cost by weight',
@@ -13,6 +14,7 @@ class FoodRepository {
         location: 'S23',
       ),
       Food(
+        id: 1,
         assetPath: 'assets/images/food_line/image 17 (1).png',
         productName: 'Wonder Bread Classic',
         note: 'Wonder',
@@ -22,6 +24,7 @@ class FoodRepository {
         location: 'S23',
       ),
       Food(
+        id: 2,
         assetPath: 'assets/images/food_line/image 17 (2).png',
         productName: 'Ultra-Filtered Milk',
         note: 'Fairlife 2%',
@@ -31,6 +34,7 @@ class FoodRepository {
         location: 'S23',
       ),
       Food(
+        id: 3,
         assetPath: 'assets/images/food_line/image 17 (3).png',
         productName: 'Bananas, Each',
         note: 'Fresh Produce',
@@ -39,6 +43,7 @@ class FoodRepository {
         location: 'S23',
       ),
       Food(
+        id: 4,
         assetPath: 'assets/images/food_line/image 17 (4).png',
         productName: 'Creamy Peanut Butter',
         note: '18 oz, Great Value',
@@ -48,6 +53,7 @@ class FoodRepository {
         location: 'S23',
       ),
       Food(
+        id: 5,
         assetPath: 'assets/images/food_line/image 17 (5).png',
         productName: 'Ben & Jerry' 's',
         note: 'Strawberry Cheesecake',
@@ -57,6 +63,7 @@ class FoodRepository {
         location: 'S23',
       ),
       Food(
+        id: 6,
         assetPath: 'assets/images/food_line/image 17 (6).png',
         productName: 'Hass Avocados',
         note: 'Fresh Produce',
@@ -66,6 +73,7 @@ class FoodRepository {
         location: 'S23',
       ),
       Food(
+        id: 7,
         assetPath: 'assets/images/food_line/image 17 (7).png',
         productName: 'Fresh Spinach, 10 oz',
         note: 'Marketside',

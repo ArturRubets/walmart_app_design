@@ -1,5 +1,13 @@
 abstract class Product {
+  final int id;
   final String assetPath;
   final String productName;
-  Product({required this.assetPath, required this.productName});
+  final double price;
+
+  Product({
+    required this.id,
+    required this.assetPath,
+    required this.productName,
+    required this.price,
+  });
 }

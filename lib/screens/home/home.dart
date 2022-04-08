@@ -71,7 +71,6 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(width: 20),
             MyBadge(
-              value: "2",
               top: -6,
               right: -6,
               color: const Color(0xFFFCB619),

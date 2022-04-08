@@ -48,6 +48,7 @@ class Body extends StatelessWidget {
         ...buildBrandsSection(),
         const SizedBox(height: 56),
         ...buildElectronicsGroseriesSection(),
+        const SizedBox(height: 50),
       ],
     );
   }
