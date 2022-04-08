@@ -17,7 +17,7 @@ class MyBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final value = AppStateScope.of(context).value;
+    final itemsInCart = AppStateScope.of(context).itemsInCart.length;
     return Stack(
       alignment: Alignment.center,
       clipBehavior: Clip.none,
@@ -37,7 +37,7 @@ class MyBadge extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                '$value',
+                '$itemsInCart',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 8,

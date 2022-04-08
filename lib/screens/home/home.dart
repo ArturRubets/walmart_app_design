@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:walmart_app_design/constants.dart';
-import 'package:walmart_app_design/model/electronic_repository.dart';
-import 'package:walmart_app_design/model/food_repository.dart';
+import 'package:walmart_app_design/main.dart';
+import 'package:walmart_app_design/model/electronic.dart';
+import 'package:walmart_app_design/model/food.dart';
 import 'package:walmart_app_design/model/offers_repository.dart';
 import 'package:walmart_app_design/screens/home/components/body.dart';
 import 'package:walmart_app_design/screens/home/components/my_badge.dart';
@@ -24,8 +27,6 @@ class HomePage extends StatelessWidget {
               (context, index) {
                 return Body(
                   offers: OffersRepository.loadOffers(),
-                  foods: FoodRepository.loadFoods(),
-                  electronic: ElectronicRepository.loadElectronic(),
                 );
               },
               childCount: 1,
@@ -70,15 +71,26 @@ class HomePage extends StatelessWidget {
                   .copyWith(color: kWhite.withOpacity(0.8)),
             ),
             const SizedBox(width: 20),
-            MyBadge(
-              top: -6,
-              right: -6,
-              color: const Color(0xFFFCB619),
-              child: Image.asset(
-                'assets/icons/shopping-cart-outline.png',
-                width: 24,
-                height: 24,
-                color: kWhite,
+            InkWell(
+              onTap: () {
+                AppStateScope.of(context).itemsInCart.forEach((element) {
+                  if (element is Food) {
+                    inspect(element as Food);
+                  } else if (element is Electronic) {
+                    inspect(element as Electronic);
+                  }
+                });
+              },
+              child: MyBadge(
+                top: -6,
+                right: -6,
+                color: const Color(0xFFFCB619),
+                child: Image.asset(
+                  'assets/icons/shopping-cart-outline.png',
+                  width: 24,
+                  height: 24,
+                  color: kWhite,
+                ),
               ),
             ),
           ],

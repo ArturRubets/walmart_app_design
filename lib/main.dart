@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/model/app_state.dart';
+import 'package:walmart_app_design/model/electronic_repository.dart';
+import 'package:walmart_app_design/model/food_repository.dart';
+import 'package:walmart_app_design/model/product.dart';
 import 'package:walmart_app_design/screens/home/home.dart';
 import 'package:walmart_app_design/screens/splash/splash.dart';
 
@@ -9,16 +13,6 @@ void main() {
       child: MyApp(),
     ),
   );
-}
-
-class AppState {
-  const AppState({required this.value});
-
-  final int value;
-
-  AppState copyWith({int? value}) {
-    return AppState(value: value ?? this.value);
-  }
 }
 
 class AppStateWidget extends StatefulWidget {
@@ -37,13 +31,16 @@ class AppStateWidget extends StatefulWidget {
 
 class _AppStateWidgetState extends State<AppStateWidget> {
   AppState _model = AppState(
-    value: 10,
+    foodList: FoodRepository.loadFoods(),
+    electronicList: ElectronicRepository.loadElectronic(),
   );
 
-  void addValue() {
+  void addToCart(Product product) {
+    final List<Product> newItemsInCart = List.from(_model.itemsInCart);
+    newItemsInCart.add(product);
     setState(() {
       _model = _model.copyWith(
-        value: _model.value + 1,
+        itemsInCart: newItemsInCart,
       );
     });
   }
@@ -81,7 +78,7 @@ class MyApp extends StatelessWidget {
       scrollBehavior: const ConstantScrollBehavior(),
       debugShowCheckedModeBanner: false,
       title: 'Walmart',
-      theme: _buildTheme(),
+      theme: buildTheme(),
       home: const HomePage(),
       initialRoute: '/splash',
       onGenerateRoute: _getRoute,
@@ -96,41 +93,4 @@ class MyApp extends StatelessWidget {
       builder: ((context) => const SplashPage(duration: Duration(seconds: 2))),
     );
   }
-}
-
-ThemeData _buildTheme() {
-  final ThemeData base = ThemeData.light();
-  return base.copyWith(
-    colorScheme: base.colorScheme.copyWith(
-      primary: kBlue200,
-    ),
-    textTheme: _buildTextTheme(base.textTheme),
-  );
-}
-
-TextTheme _buildTextTheme(TextTheme base) {
-  return base
-      .copyWith(
-        headline1: base.headline1!.copyWith(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
-        headline2: base.headline2!.copyWith(
-          fontSize: 14,
-        ),
-        bodyText1: base.bodyText1!.copyWith(
-          fontSize: 12,
-        ),
-      )
-      .apply(
-        fontFamily: 'Ambit',
-        displayColor: Colors.white,
-      );
-}
-
-class ConstantScrollBehavior extends ScrollBehavior {
-  const ConstantScrollBehavior();
-  @override
-  ScrollPhysics getScrollPhysics(BuildContext context) =>
-      const ClampingScrollPhysics();
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/main.dart';
 import 'package:walmart_app_design/model/food.dart';
 import 'package:walmart_app_design/screens/home/components/track_order/button.dart';
 
@@ -113,13 +114,16 @@ class ProductCard extends StatelessWidget {
         Positioned(
           right: 8,
           top: 8,
-          child: Button(
-            image: Image.asset(
-              'assets/icons/coolicon.png',
-              width: 12,
-              height: 12,
+          child: InkWell(
+            onTap: () => AppStateWidget.of(context).addToCart(food),
+            child: Button(
+              image: Image.asset(
+                'assets/icons/coolicon.png',
+                width: 12,
+                height: 12,
+              ),
+              title: 'Add',
             ),
-            title: 'Add',
           ),
         ),
       ],

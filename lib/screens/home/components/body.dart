@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
-import 'package:walmart_app_design/model/electronic.dart';
-import 'package:walmart_app_design/model/food.dart';
+import 'package:walmart_app_design/main.dart';
 import 'package:walmart_app_design/model/offer.dart';
 import 'package:walmart_app_design/screens/home/components/brands.dart';
 import 'package:walmart_app_design/screens/home/components/card_top_offer.dart';
@@ -15,14 +14,10 @@ import 'package:walmart_app_design/screens/home/components/track_order/track_ord
 
 class Body extends StatelessWidget {
   final List<Offer> offers;
-  final List<Food> foods;
-  final List<Electronic> electronic;
 
   const Body({
     Key? key,
     required this.offers,
-    required this.foods,
-    required this.electronic,
   }) : super(key: key);
 
   @override
@@ -43,11 +38,11 @@ class Body extends StatelessWidget {
           child: FilterPanels(),
         ),
         const SizedBox(height: 24),
-        ...buildFoodGroseriesSection(),
+        ...buildFoodGroseriesSection(context),
         const SizedBox(height: 32),
         ...buildBrandsSection(),
         const SizedBox(height: 56),
-        ...buildElectronicsGroseriesSection(),
+        ...buildElectronicsGroseriesSection(context),
         const SizedBox(height: 50),
       ],
     );
@@ -79,7 +74,8 @@ class Body extends StatelessWidget {
     );
   }
 
-  List<Widget> buildFoodGroseriesSection() {
+  List<Widget> buildFoodGroseriesSection(BuildContext context) {
+    var foodList = AppStateScope.of(context).foodList;
     return [
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -95,10 +91,10 @@ class Body extends StatelessWidget {
         child: Row(
           children: [
             ...List.generate(
-              foods.length,
+              foodList.length,
               (index) => Padding(
                 padding: const EdgeInsets.only(left: 16),
-                child: ProductCard(food: foods[index]),
+                child: ProductCard(food: foodList[index]),
               ),
             ),
             const SizedBox(width: 16),
@@ -108,7 +104,9 @@ class Body extends StatelessWidget {
     ];
   }
 
-  List<Widget> buildElectronicsGroseriesSection() {
+  List<Widget> buildElectronicsGroseriesSection(BuildContext context) {
+    var electronicList = AppStateScope.of(context).electronicList;
+
     return [
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -124,10 +122,10 @@ class Body extends StatelessWidget {
         child: Row(
           children: [
             ...List.generate(
-              electronic.length,
+              electronicList.length,
               (index) => Padding(
                 padding: const EdgeInsets.only(left: 16),
-                child: ElectronicCard(electronic: electronic[index]),
+                child: ElectronicCard(electronic: electronicList[index]),
               ),
             ),
             const SizedBox(width: 16),
