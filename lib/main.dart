@@ -45,6 +45,10 @@ class _AppStateWidgetState extends State<AppStateWidget> {
     });
   }
 
+  int itemsInCart() {
+    return Set.from(_model.itemsInCart.map((item) => item.id)).length;
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppStateScope(
