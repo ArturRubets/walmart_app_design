@@ -17,7 +17,7 @@ class Cart extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return Body();
+                return const Body();
               },
               childCount: 1,
             ),

@@ -81,6 +81,11 @@ flutter:
     - family: Ambit
       fonts:
         - asset: fonts/Ambit-Regular.ttf
+        - asset: fonts/Ambit-SemiBold.ttf
+          weight: 400
+        - asset: fonts/Ambit-Bold.ttf
+          weight: 700
+
     - family: Aeonik
       fonts:
         - asset: fonts/Aeonik-Regular.otf

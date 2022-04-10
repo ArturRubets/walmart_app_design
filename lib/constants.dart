@@ -13,6 +13,8 @@ const kBlack600 = Color(0xFF000000);
 
 const kWhite = Color(0xFFFFFFFF);
 
+const kYellow200 = Color(0xFFFCB61A);
+
 ThemeData buildTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(

@@ -4,8 +4,10 @@ import 'package:walmart_app_design/model/app_state.dart';
 import 'package:walmart_app_design/model/electronic_repository.dart';
 import 'package:walmart_app_design/model/food_repository.dart';
 import 'package:walmart_app_design/model/product.dart';
+import 'package:walmart_app_design/model/purchase_position.dart';
 import 'package:walmart_app_design/screens/home/home.dart';
 import 'package:walmart_app_design/screens/splash/splash.dart';
+import "package:collection/collection.dart";
 
 void main() {
   runApp(
@@ -43,6 +45,20 @@ class _AppStateWidgetState extends State<AppStateWidget> {
         itemsInCart: newItemsInCart,
       );
     });
+  }
+
+  List<PurchasePosition> getPurchases() {
+    List<PurchasePosition> items = [];
+
+    final groupedItems = groupBy(_model.itemsInCart, (Product item) => item.id);
+
+    groupedItems.forEach((key, value) {
+      items.add(
+        PurchasePosition(product: value.first, quantity: value.length),
+      );
+    });
+
+    return items;
   }
 
   int itemsInCart() {
