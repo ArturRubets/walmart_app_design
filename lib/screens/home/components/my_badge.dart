@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:walmart_app_design/main.dart';
 
 class MyBadge extends StatelessWidget {
   const MyBadge({

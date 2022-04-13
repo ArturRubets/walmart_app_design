@@ -6,17 +6,17 @@ class AppState {
   const AppState({
     required this.foodList,
     required this.electronicList,
-    this.itemsInCart = const [],
+    this.itemsInCart = const {},
   });
 
   final List<Food> foodList;
   final List<Electronic> electronicList;
-  final List<Product> itemsInCart;
+  final Map<Product, int> itemsInCart;
 
   AppState copyWith({
     List<Food>? foodList,
     List<Electronic>? electronicList,
-    List<Product>? itemsInCart,
+    Map<Product, int>? itemsInCart,
   }) {
     return AppState(
       foodList: foodList ?? this.foodList,

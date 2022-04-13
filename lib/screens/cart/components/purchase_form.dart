@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
-import 'package:walmart_app_design/model/purchase_position.dart';
+import 'package:walmart_app_design/main.dart';
+import 'package:walmart_app_design/model/product.dart';
 
 class PurchaseForm extends StatelessWidget {
   const PurchaseForm({
     Key? key,
-    required this.purchase,
+    required this.product,
+    required this.quantity,
   }) : super(key: key);
 
-  final PurchasePosition purchase;
+  final Product product;
+  final int quantity;
 
   @override
   Widget build(BuildContext context) {
-    var item = purchase.product;
-    var quantity = purchase.quantity;
+    var addToCart = AppStateWidget.of(context).addToCart;
+    var removeFromCart = AppStateWidget.of(context).removeFromCart;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(item.assetPath),
+            Image.asset(product.assetPath),
             Padding(
               padding: const EdgeInsets.only(
                 top: 15,
@@ -30,7 +33,7 @@ class PurchaseForm extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item.productName,
+                    product.productName,
                     style: Theme.of(context)
                         .textTheme
                         .headline2!
@@ -38,7 +41,7 @@ class PurchaseForm extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '\$${item.price}',
+                    '\$${product.price}',
                     style: Theme.of(context).textTheme.headline1!.copyWith(
                           fontWeight: FontWeight.w400,
                           color: kBlack600,
@@ -136,7 +139,11 @@ class PurchaseForm extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const Icon(Icons.remove),
+                  IconButton(
+                    onPressed: () => removeFromCart(product, context),
+                    icon: const Icon(Icons.remove),
+                    splashRadius: 15,
+                  ),
                   Text(
                     '$quantity',
                     style: Theme.of(context).textTheme.headline1!.copyWith(
@@ -144,7 +151,11 @@ class PurchaseForm extends StatelessWidget {
                           fontWeight: FontWeight.w400,
                         ),
                   ),
-                  const Icon(Icons.add)
+                  IconButton(
+                    onPressed: () => addToCart(product),
+                    icon: const Icon(Icons.add),
+                    splashRadius: 15,
+                  ),
                 ],
               ),
             ),

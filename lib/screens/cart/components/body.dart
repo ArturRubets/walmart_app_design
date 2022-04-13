@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:walmart_app_design/common/rounded_button.dart';
 import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/main.dart';
-import 'package:walmart_app_design/model/purchase_position.dart';
+import 'package:walmart_app_design/model/product.dart';
 import 'package:walmart_app_design/screens/cart/components/header_cart.dart';
 import 'package:walmart_app_design/screens/cart/components/purchase_form.dart';
 
@@ -11,13 +11,15 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final quantityItemsInCart = AppStateWidget.of(context).itemsInCart();
-    final items = AppStateWidget.of(context).getPurchases();
+    final quantityItemsInCart =
+        AppStateWidget.of(context).quantityItemsInCart();
+    final itemsInCart = AppStateScope.of(context).itemsInCart;
+    
     return Column(
       children: [
         HeaderCart(itemsInCart: quantityItemsInCart),
         const ShippingAddress(),
-        ...generatePurchases(items),
+        ...generatePurchases(itemsInCart),
         const SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -40,6 +42,11 @@ class Body extends StatelessWidget {
   }
 
   Column total(BuildContext context) {
+    var subtotal =
+        AppStateWidget.of(context).calculateSubtotal().toStringAsFixed(2);
+    var taxes = AppStateWidget.of(context).calcTaxes().toStringAsFixed(2);
+    var total = AppStateWidget.of(context).calcTotal().toStringAsFixed(2);
+
     return Column(
       children: [
         const Divider(),
@@ -63,7 +70,7 @@ class Body extends StatelessWidget {
               ),
             ),
             Text(
-              '\$499.60',
+              '\$$subtotal',
               style: Theme.of(context).textTheme.headline1!.copyWith(
                     color: kBlack600,
                     fontWeight: FontWeight.w400,
@@ -83,7 +90,7 @@ class Body extends StatelessWidget {
                   .copyWith(color: kBlack600),
             ),
             Text(
-              '\$41.40',
+              '\$$taxes',
               style: Theme.of(context).textTheme.headline1!.copyWith(
                     color: kBlack600,
                     fontWeight: FontWeight.w400,
@@ -96,8 +103,8 @@ class Body extends StatelessWidget {
         const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(
+          children: [
+            const Text(
               'Total',
               style: TextStyle(
                 fontSize: 20,
@@ -105,8 +112,8 @@ class Body extends StatelessWidget {
               ),
             ),
             Text(
-              '\$541.00',
-              style: TextStyle(
+              '\$$total',
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.w600,
               ),
@@ -117,7 +124,9 @@ class Body extends StatelessWidget {
     );
   }
 
-  List<Widget> generatePurchases(List<PurchasePosition> items) {
+  List<Widget> generatePurchases(Map<Product, int> items) {
+    var products = items.keys;
+    var quantityProducts = items.values;
     return List.generate(items.length, (index) {
       return Padding(
         padding: const EdgeInsets.only(
@@ -127,7 +136,8 @@ class Body extends StatelessWidget {
           bottom: 20,
         ),
         child: PurchaseForm(
-          purchase: items[index],
+          product: products.elementAt(index),
+          quantity: quantityProducts.elementAt(index),
         ),
       );
     });

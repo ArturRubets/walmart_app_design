@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
               },
               childCount: 1,
             ),
-          )
+          ),
         ],
       ),
     );

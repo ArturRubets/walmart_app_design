@@ -17,7 +17,7 @@ class Cart extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return const Body();
+                return  const Body();
               },
               childCount: 1,
             ),
@@ -43,7 +43,7 @@ Row buildAppBar(BuildContext context) {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                'Hi, Artur',
+                'Hi, John',
                 style: Theme.of(context).textTheme.headline3,
                 overflow: TextOverflow.ellipsis,
               ),
