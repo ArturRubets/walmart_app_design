@@ -12,6 +12,7 @@ class Body extends StatelessWidget {
         super(key: key);
 
   final Map<Product, int> itemsInCart;
+  int _radioVal = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +38,17 @@ class Body extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
+              ),
+              const SizedBox(height: 16),
+              const Divider(),
+              Radio(
+                value: 0,
+                groupValue: _radioVal,
+                onChanged: (int? value) {
+                  if (value != null) {
+                    _radioVal = value;
+                  }
+                },
               ),
             ],
           ),
