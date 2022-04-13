@@ -4,6 +4,7 @@ const kBlue100 = Color(0xFFE9F2F9);
 const kBlue200 = Color(0xFF0B59D5);
 const kBlue300 = Color(0xFF0A50C0);
 const kBlue400 = Color(0xFF0948AD);
+const kBlue600 = Color(0xFF144056);
 
 const kGrey100 = Color(0xFFDCDCDC);
 const kGrey200 = Color(0xFF999999);

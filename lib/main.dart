@@ -4,6 +4,7 @@ import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/model/app_state.dart';
 import 'package:walmart_app_design/model/electronic_repository.dart';
 import 'package:walmart_app_design/model/food_repository.dart';
+import 'package:walmart_app_design/model/payment_repository.dart';
 import 'package:walmart_app_design/model/product.dart';
 import 'package:walmart_app_design/screens/cart/cart.dart';
 import 'package:walmart_app_design/screens/home/components/my_badge.dart';
@@ -38,6 +39,7 @@ class _AppStateWidgetState extends State<AppStateWidget> {
   AppState _model = AppState(
     foodList: FoodRepository.loadFoods(),
     electronicList: ElectronicRepository.loadElectronic(),
+    paymentList: PaymentRepository.loadPayment(),
   );
 
   void addToCart(Product product) {

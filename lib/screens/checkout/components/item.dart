@@ -18,7 +18,8 @@ class Item extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DecoratedBox(
+          Container(
+            padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
@@ -26,8 +27,8 @@ class Item extends StatelessWidget {
                 style: BorderStyle.solid,
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(3),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
               child: Image.asset(
                 product.assetPath,
                 width: 56,
