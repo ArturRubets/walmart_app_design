@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/common/rounded_button.dart';
+import 'package:walmart_app_design/common/shipping_address.dart';
 import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/main.dart';
 import 'package:walmart_app_design/model/product.dart';
-import 'package:walmart_app_design/screens/cart/components/header_cart.dart';
+import 'package:walmart_app_design/common/header_cart.dart';
 import 'package:walmart_app_design/screens/cart/components/purchase_form.dart';
+import 'package:walmart_app_design/screens/checkout/checkout.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -14,10 +16,10 @@ class Body extends StatelessWidget {
     final quantityItemsInCart =
         AppStateWidget.of(context).quantityItemsInCart();
     final itemsInCart = AppStateScope.of(context).itemsInCart;
-    
+
     return Column(
       children: [
-        HeaderCart(itemsInCart: quantityItemsInCart),
+        HeaderCart(title: 'Cart',itemsInCart: quantityItemsInCart),
         const ShippingAddress(),
         ...generatePurchases(itemsInCart),
         const SizedBox(height: 20),
@@ -31,7 +33,12 @@ class Body extends StatelessWidget {
             vertical: 40,
           ),
           child: InkWell(
-            onTap: () {},
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Checkout(itemsInCart: itemsInCart),
+              ),
+            ),
             child: const RoundedButton(
               text: 'Continue to checkout',
             ),
@@ -141,41 +148,5 @@ class Body extends StatelessWidget {
         ),
       );
     });
-  }
-}
-
-class ShippingAddress extends StatelessWidget {
-  const ShippingAddress({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Ink(
-      padding: const EdgeInsets.only(
-        top: 16,
-        left: 16,
-        bottom: 16,
-        right: 28,
-      ),
-      color: kBlue100,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Shipping  👉  Dallas 75220 (In-Store)',
-            style: Theme.of(context)
-                .textTheme
-                .headline2!
-                .copyWith(color: kBlack600),
-          ),
-          InkWell(
-            onTap: () {},
-            borderRadius: BorderRadius.circular(20),
-            child: const Icon(Icons.more_horiz),
-          ),
-        ],
-      ),
-    );
   }
 }

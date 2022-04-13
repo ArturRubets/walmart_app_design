@@ -4,10 +4,12 @@ import 'package:walmart_app_design/constants.dart';
 class HeaderCart extends StatelessWidget {
   const HeaderCart({
     Key? key,
-    required this.itemsInCart,
+    required this.title,
+    this.itemsInCart,
   }) : super(key: key);
 
-  final int itemsInCart;
+  final String title;
+  final int? itemsInCart;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class HeaderCart extends StatelessWidget {
       ),
       child: RichText(
         text: TextSpan(
-          text: 'Cart',
+          text: title,
           style: const TextStyle(
             fontSize: 32,
             color: kWhite,
@@ -29,18 +31,20 @@ class HeaderCart extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           children: [
-            TextSpan(
-              text: ' •',
-              style: TextStyle(
-                color: kWhite.withOpacity(0.4),
+            if (itemsInCart != null)
+              TextSpan(
+                text: ' •',
+                style: TextStyle(
+                  color: kWhite.withOpacity(0.4),
+                ),
               ),
-            ),
-            TextSpan(
-              text: ' $itemsInCart',
-              style: TextStyle(
-                color: kWhite.withOpacity(0.4),
+            if (itemsInCart != null)
+              TextSpan(
+                text: ' $itemsInCart',
+                style: TextStyle(
+                  color: kWhite.withOpacity(0.4),
+                ),
               ),
-            ),
           ],
         ),
       ),
