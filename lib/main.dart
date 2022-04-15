@@ -9,6 +9,7 @@ import 'package:walmart_app_design/model/product.dart';
 import 'package:walmart_app_design/screens/cart/cart.dart';
 import 'package:walmart_app_design/screens/home/components/my_badge.dart';
 import 'package:walmart_app_design/screens/home/home.dart';
+import 'package:walmart_app_design/screens/loyalty_program/loyalty_program.dart';
 import 'package:walmart_app_design/screens/splash/splash.dart';
 import "package:collection/collection.dart";
 
@@ -70,7 +71,7 @@ class _AppStateWidgetState extends State<AppStateWidget> {
       );
     });
 
-    if(newItemsInCart.isEmpty) {
+    if (newItemsInCart.isEmpty) {
       Navigator.pop(context);
     }
   }

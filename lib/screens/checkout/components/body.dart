@@ -8,6 +8,7 @@ import 'package:walmart_app_design/model/payment.dart';
 import 'package:walmart_app_design/model/product.dart';
 import 'package:walmart_app_design/screens/checkout/components/item.dart';
 import 'package:walmart_app_design/screens/checkout/components/payment_method.dart';
+import 'package:walmart_app_design/screens/loyalty_program/loyalty_program.dart';
 
 class Body extends StatelessWidget {
   const Body({required this.itemsInCart, Key? key}) : super(key: key);
@@ -53,26 +54,26 @@ class Body extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 42),
-        _buildButtonToContinue(),
+        _buildButtonToContinue(context),
         const SizedBox(height: 24),
       ],
     );
   }
 
-  Padding _buildButtonToContinue() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(
+  Padding _buildButtonToContinue(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 40,
       ),
       child: InkWell(
-        // onTap: () => Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => Checkout(itemsInCart: itemsInCart),
-        //   ),
-        // ),
-        child: RoundedButton(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoyaltyProgram(),
+          ),
+        ),
+        child: const RoundedButton(
           text: 'Continue 👉',
         ),
       ),
