@@ -11,6 +11,7 @@ class Checkout extends StatelessWidget {
         super(key: key);
 
   final Map<Product, int> itemsInCart;
+  static const routeName = '/checkout';
 
   @override
   Widget build(BuildContext context) {

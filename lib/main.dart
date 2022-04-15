@@ -7,6 +7,7 @@ import 'package:walmart_app_design/model/food_repository.dart';
 import 'package:walmart_app_design/model/payment_repository.dart';
 import 'package:walmart_app_design/model/product.dart';
 import 'package:walmart_app_design/screens/cart/cart.dart';
+import 'package:walmart_app_design/screens/checkout/checkout.dart';
 import 'package:walmart_app_design/screens/home/components/my_badge.dart';
 import 'package:walmart_app_design/screens/home/home.dart';
 import 'package:walmart_app_design/screens/loyalty_program/loyalty_program.dart';
@@ -123,23 +124,50 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      scrollBehavior: const ConstantScrollBehavior(),
-      debugShowCheckedModeBanner: false,
       title: 'Walmart',
-      theme: buildTheme(),
       home: const HomePage(),
       initialRoute: '/splash',
       onGenerateRoute: _getRoute,
+      theme: buildTheme(),
+      scrollBehavior: const ConstantScrollBehavior(),
+      debugShowCheckedModeBanner: false,
     );
   }
 
   Route? _getRoute(RouteSettings settings) {
-    if (settings.name != '/splash') {
-      return null;
+    if (settings.name == SplashPage.routeName) {
+      return MaterialPageRoute(
+        builder: ((context) =>
+            const SplashPage(duration: Duration(seconds: 2))),
+      );
     }
-    return MaterialPageRoute(
-      builder: ((context) => const SplashPage(duration: Duration(seconds: 2))),
-    );
+
+    if (settings.name == Cart.routeName) {
+      return MaterialPageRoute(
+        builder: (context) => const Cart(),
+      );
+    }
+
+    if (settings.name == Checkout.routeName) {
+      final itemsInCart = settings.arguments as Map<Product, int>;
+      return MaterialPageRoute(builder: (context) {
+        return Checkout(itemsInCart: itemsInCart);
+      });
+    }
+
+    if (settings.name == LoyaltyProgram.routeName) {
+      return MaterialPageRoute(
+        builder: (context) => const LoyaltyProgram(),
+      );
+    }
+
+    if (settings.name == HomePage.routeName) {
+      return MaterialPageRoute(
+        builder: (context) => const HomePage(),
+      );
+    }
+    assert(false, 'Need to implement ${settings.name}');
+    return null;
   }
 }
 

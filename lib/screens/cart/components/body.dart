@@ -67,11 +67,10 @@ class Body extends StatelessWidget {
         vertical: 40,
       ),
       child: InkWell(
-        onTap: () => Navigator.push(
+        onTap: () => Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-            builder: (context) => Checkout(itemsInCart: itemsInCart),
-          ),
+          Checkout.routeName,
+          arguments: itemsInCart,
         ),
         child: const RoundedButton(
           text: 'Continue to checkout',

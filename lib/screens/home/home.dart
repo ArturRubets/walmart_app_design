@@ -10,6 +10,8 @@ import 'package:walmart_app_design/screens/home/components/my_badge.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  static const routeName = '/home';
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,12 +84,7 @@ class HomePage extends StatelessWidget {
               InkWell(
                 onTap: () {
                   if (itemsInCart > 0) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => const Cart()),
-                      ),
-                    );
+                    Navigator.pushNamed(context, Cart.routeName);
                   }
                 },
                 borderRadius: BorderRadius.circular(20),

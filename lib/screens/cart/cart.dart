@@ -5,6 +5,8 @@ import 'package:walmart_app_design/screens/cart/components/body.dart';
 class Cart extends StatelessWidget {
   const Cart({Key? key}) : super(key: key);
 
+  static const routeName = '/cart';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,7 @@ class Cart extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return  const Body();
+                return const Body();
               },
               childCount: 1,
             ),

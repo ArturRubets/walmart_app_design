@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 
+import 'package:walmart_app_design/screens/home/home.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key, required this.duration}) : super(key: key);
   final Duration duration;
+  static const routeName = '/splash';
   @override
   State<SplashPage> createState() => _SplashPageState();
 }
@@ -29,7 +32,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void _comeBackToHome() async {
     await Future.delayed(
       widget.duration,
-      () => Navigator.pop(context),
+      () => Navigator.pushReplacementNamed(context, HomePage.routeName),
     );
   }
 

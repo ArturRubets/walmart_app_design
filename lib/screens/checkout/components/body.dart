@@ -67,12 +67,7 @@ class Body extends StatelessWidget {
         vertical: 40,
       ),
       child: InkWell(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoyaltyProgram(),
-          ),
-        ),
+        onTap: () => Navigator.pushNamed(context, LoyaltyProgram.routeName),
         child: const RoundedButton(
           text: 'Continue 👉',
         ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/screens/home/home.dart';
+import 'package:walmart_app_design/screens/splash/splash.dart';
 
 class LoyaltyProgram extends StatelessWidget {
   const LoyaltyProgram({Key? key}) : super(key: key);
+
+  static const routeName = '/loyalty_program';
 
   @override
   Widget build(BuildContext context) {
@@ -68,11 +71,11 @@ class LoyaltyProgram extends StatelessWidget {
               ),
               const SizedBox(height: 41),
               OutlinedButton(
-                onPressed: () => Navigator.push(
+                onPressed: () => Navigator.pushNamedAndRemoveUntil(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
+                  // HomePage.routeName,
+                  SplashPage.routeName,
+                  (route) => false,
                 ),
                 child: const Text(
                   'CONTINUE',
