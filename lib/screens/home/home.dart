@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
           SliverAppBar(
             title: buildAppBar(context),
             floating: true,
+            automaticallyImplyLeading: false,
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(

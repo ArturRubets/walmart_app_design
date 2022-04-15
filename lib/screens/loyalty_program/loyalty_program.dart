@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/screens/home/home.dart';
 
 class LoyaltyProgram extends StatelessWidget {
   const LoyaltyProgram({Key? key}) : super(key: key);
@@ -67,7 +68,12 @@ class LoyaltyProgram extends StatelessWidget {
               ),
               const SizedBox(height: 41),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                ),
                 child: const Text(
                   'CONTINUE',
                   style: TextStyle(
