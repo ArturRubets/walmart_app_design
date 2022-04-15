@@ -24,6 +24,7 @@ ThemeData buildTheme() {
     colorScheme: base.colorScheme.copyWith(
       primary: kBlue200,
     ),
+    scaffoldBackgroundColor: kWhite,
     textTheme: buildTextTheme(base.textTheme),
   );
 }

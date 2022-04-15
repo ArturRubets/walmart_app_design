@@ -56,11 +56,18 @@ class _AppStateWidgetState extends State<AppStateWidget> {
     });
   }
 
-  void removeFromCart(Product product, BuildContext context) {
+  void closeScreenIfEmptyCart(
+      BuildContext context, Map<Product, int> itemsInCart) {
+    if (itemsInCart.isEmpty) {
+      Navigator.of(context).pop();
+    }
+  }
+
+  void removeFromCart(Product product, int count, BuildContext context) {
     final Map<Product, int> newItemsInCart = Map.from(_model.itemsInCart);
     var quantity = newItemsInCart[product] ?? 0;
-    if (quantity - 1 > 0) {
-      newItemsInCart[product] = quantity - 1;
+    if (quantity - count > 0) {
+      newItemsInCart[product] = quantity - count;
     } else {
       // none products
       newItemsInCart.remove(product);
@@ -71,6 +78,7 @@ class _AppStateWidgetState extends State<AppStateWidget> {
         itemsInCart: newItemsInCart,
       );
     });
+    closeScreenIfEmptyCart(context, _model.itemsInCart);
   }
 
   void clearItemsInCart() {
@@ -146,7 +154,7 @@ class MyApp extends StatelessWidget {
 
     if (settings.name == Cart.routeName) {
       return MaterialPageRoute(
-        builder: (context) =>  Cart(),
+        builder: (context) => Cart(),
       );
     }
 

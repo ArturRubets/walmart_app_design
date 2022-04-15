@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
-
 import 'package:walmart_app_design/screens/home/home.dart';
 
 class SplashPage extends StatefulWidget {

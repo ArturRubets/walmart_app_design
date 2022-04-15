@@ -26,7 +26,7 @@ class Body extends StatelessWidget {
         HeaderCart(title: 'Cart', itemsInCart: quantityItemsInCart),
         const ShippingAddress(),
         ...generatePurchases(itemsInCart),
-        const SizedBox(height: 20),
+        const SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Summary(

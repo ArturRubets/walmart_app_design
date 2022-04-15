@@ -73,37 +73,7 @@ class PurchaseForm extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 26),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Protect your purchase',
-                  style: Theme.of(context).textTheme.headline2!.copyWith(
-                        color: kBlack600,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Ambit',
-                      ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  'Get the best value on product protection',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: kGrey200),
-                )
-              ],
-            ),
-            const Icon(
-              Icons.keyboard_arrow_down,
-              size: 24,
-            )
-          ],
-        ),
+        const MyExpansionPanelList(),
         const SizedBox(height: 16),
         const Divider(),
         const SizedBox(height: 16),
@@ -112,12 +82,15 @@ class PurchaseForm extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(
-                  'Remove',
-                  style: Theme.of(context).textTheme.headline3!.copyWith(
-                        color: kBlack600,
-                        decoration: TextDecoration.underline,
-                      ),
+                InkWell(
+                  onTap: (() => removeFromCart(product, quantity, context)),
+                  child: Text(
+                    'Remove',
+                    style: Theme.of(context).textTheme.headline3!.copyWith(
+                          color: kBlack600,
+                          decoration: TextDecoration.underline,
+                        ),
+                  ),
                 ),
                 const SizedBox(width: 24),
                 Text(
@@ -143,11 +116,7 @@ class PurchaseForm extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      removeFromCart(product, context);
-                      if (index == 0 && quantity == 1) {
-                        //  quantity == 1 because quantity has not been updated yet
-                        Navigator.pop(context);
-                      }
+                      removeFromCart(product, 1, context);
                     },
                     icon: const Icon(Icons.remove),
                     splashRadius: 15,
@@ -170,6 +139,62 @@ class PurchaseForm extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class MyExpansionPanelList extends StatefulWidget {
+  const MyExpansionPanelList({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<MyExpansionPanelList> createState() => _MyExpansionPanelListState();
+}
+
+class _MyExpansionPanelListState extends State<MyExpansionPanelList> {
+  bool _isOpen = false;
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionPanelList(
+      elevation: 0,
+      children: [
+        ExpansionPanel(
+          headerBuilder: (context, isExpanded) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Protect your purchase',
+                style: Theme.of(context).textTheme.headline2!.copyWith(
+                      color: kBlack600,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'Ambit',
+                    ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                'Get the best value on product protection',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(color: kGrey200),
+              )
+            ],
+          ),
+          body: Wrap(
+            children: const [
+              Text(
+                'Protect your purchase. Get the best value on product protection',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ],
+          ),
+          isExpanded: _isOpen,
+        ),
+      ],
+      expansionCallback: (i, isOpen) => setState(() {
+        _isOpen = !_isOpen;
+      }),
     );
   }
 }
