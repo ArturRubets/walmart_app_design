@@ -32,7 +32,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void _comeBackToHome() async {
     await Future.delayed(
       widget.duration,
-      () => Navigator.pushReplacementNamed(context, HomePage.routeName),
+      () => Navigator.pushReplacementNamed(
+        context,
+        HomePage.routeName,
+        arguments: context,
+      ),
     );
   }
 

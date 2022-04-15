@@ -54,6 +54,7 @@ class Body extends StatelessWidget {
         child: PurchaseForm(
           product: products.elementAt(index),
           quantity: quantityProducts.elementAt(index),
+          index: index,
         ),
       );
     });

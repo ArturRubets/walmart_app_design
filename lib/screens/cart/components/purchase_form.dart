@@ -8,10 +8,12 @@ class PurchaseForm extends StatelessWidget {
     Key? key,
     required this.product,
     required this.quantity,
+    required this.index,
   }) : super(key: key);
 
   final Product product;
   final int quantity;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +142,13 @@ class PurchaseForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   IconButton(
-                    onPressed: () => removeFromCart(product, context),
+                    onPressed: () {
+                      removeFromCart(product, context);
+                      if (index == 0 && quantity == 1) {
+                        //  quantity == 1 because quantity has not been updated yet
+                        Navigator.pop(context);
+                      }
+                    },
                     icon: const Icon(Icons.remove),
                     splashRadius: 15,
                   ),

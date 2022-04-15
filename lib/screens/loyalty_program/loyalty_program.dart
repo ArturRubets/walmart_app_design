@@ -73,7 +73,6 @@ class LoyaltyProgram extends StatelessWidget {
               OutlinedButton(
                 onPressed: () => Navigator.pushNamedAndRemoveUntil(
                   context,
-                  // HomePage.routeName,
                   SplashPage.routeName,
                   (route) => false,
                 ),

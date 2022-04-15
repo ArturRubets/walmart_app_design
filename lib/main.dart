@@ -71,10 +71,12 @@ class _AppStateWidgetState extends State<AppStateWidget> {
         itemsInCart: newItemsInCart,
       );
     });
+  }
 
-    if (newItemsInCart.isEmpty) {
-      Navigator.pop(context);
-    }
+  void clearItemsInCart() {
+    setState(() {
+      _model = _model.copyWith(itemsInCart: {});
+    });
   }
 
   int quantityItemsInCart() => _model.itemsInCart.values.sum;
@@ -144,7 +146,7 @@ class MyApp extends StatelessWidget {
 
     if (settings.name == Cart.routeName) {
       return MaterialPageRoute(
-        builder: (context) => const Cart(),
+        builder: (context) =>  Cart(),
       );
     }
 
@@ -162,6 +164,11 @@ class MyApp extends StatelessWidget {
     }
 
     if (settings.name == HomePage.routeName) {
+      final context = settings.arguments;
+      if (context != null) {
+        // to reset items in cart
+        AppStateWidget.of(context as BuildContext).clearItemsInCart();
+      }
       return MaterialPageRoute(
         builder: (context) => const HomePage(),
       );
@@ -221,7 +228,7 @@ Row buildAppBar(BuildContext context) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: ((context) => const Cart()),
+                      builder: ((context) => Cart()),
                     ),
                   );
                 }
