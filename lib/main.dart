@@ -4,6 +4,7 @@ import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/model/app_state.dart';
 import 'package:walmart_app_design/model/electronic_repository.dart';
 import 'package:walmart_app_design/model/food_repository.dart';
+import 'package:walmart_app_design/model/payment.dart';
 import 'package:walmart_app_design/model/payment_repository.dart';
 import 'package:walmart_app_design/model/product.dart';
 import 'package:walmart_app_design/screens/cart/cart.dart';
@@ -84,6 +85,24 @@ class _AppStateWidgetState extends State<AppStateWidget> {
   void clearItemsInCart() {
     setState(() {
       _model = _model.copyWith(itemsInCart: {});
+    });
+  }
+
+  void addPayment(
+      {required String name, required String number, List<String>? assetPath}) {
+    if (name.isEmpty) {
+      throw 'Empty name';
+    }
+    if (number.length != 14) {
+      throw 'Invalid value number. Must be 14 characters #### #### #### ####';
+    }
+
+    final List<Payment> newPaymentList = List.from(_model.paymentList);
+    newPaymentList.add(Payment(name: name, number: number));
+    setState(() {
+      _model = _model.copyWith(
+        paymentList: newPaymentList,
+      );
     });
   }
 

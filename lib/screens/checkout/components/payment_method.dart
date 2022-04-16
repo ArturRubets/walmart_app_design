@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/main.dart';
 import 'package:walmart_app_design/model/payment.dart';
 
 class PaymentMethod extends StatefulWidget {
@@ -11,6 +12,15 @@ class PaymentMethod extends StatefulWidget {
 
 class _PaymentMethodState extends State<PaymentMethod> {
   int _radioVal = 0;
+  final _controllerNameCard = TextEditingController();
+  final _controllerNumberCard = TextEditingController();
+
+  @override
+  void dispose() {
+    _controllerNameCard.dispose();
+    _controllerNumberCard.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +86,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         ),
         const SizedBox(height: 32),
         GestureDetector(
-          onTap: () {},
+          onTap: () async => await openDialog(),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -94,6 +104,79 @@ class _PaymentMethodState extends State<PaymentMethod> {
         ),
       ],
     );
+  }
+
+  Future<void> openDialog() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Add credit card'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                autofocus: true,
+                controller: _controllerNameCard,
+                decoration: const InputDecoration(
+                  hintText: 'Enter name card',
+                ),
+                textInputAction: TextInputAction.next,
+              ),
+              TextField(
+                controller: _controllerNumberCard,
+                decoration: const InputDecoration(
+                  hintText: 'Enter number card',
+                ),
+                onSubmitted: (_) => _submit(),
+              ),
+            ],
+          ),
+          actionsAlignment: MainAxisAlignment.spaceAround,
+          actions: [
+            TextButton(
+              onPressed: _cancel,
+              child: const Text('CANCEL'),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all(kBlue100),
+                backgroundColor: MaterialStateProperty.all(kBlue200),
+              ),
+            ),
+            TextButton(
+              onPressed: _submit,
+              child: const Text('SUBMIT'),
+            ),
+          ],
+        ),
+      );
+
+  void _cancel() {
+    _controllerNameCard.clear();
+    _controllerNumberCard.clear();
+    Navigator.of(context).pop();
+  }
+
+  void _submit() {
+    try {
+      var nameCard = _controllerNameCard.text;
+      var numberCard = _controllerNumberCard.text;
+      if (nameCard.isNotEmpty && numberCard.isNotEmpty) {
+        AppStateWidget.of(context)
+            .addPayment(name: nameCard, number: numberCard);
+        _controllerNameCard.clear();
+        _controllerNumberCard.clear();
+        Navigator.of(context).pop();
+      }
+    } catch (e) {
+      final snackBar = SnackBar(
+        content: Text(
+          e.toString(),
+        ),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {},
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   Widget? buildPaymentPicture(Payment payment) {

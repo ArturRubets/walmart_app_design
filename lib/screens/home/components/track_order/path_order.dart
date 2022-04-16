@@ -20,8 +20,7 @@ class PathOrder extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
               ),
             ),
-            SizedBox(
-              width: 100,
+            Expanded(
               child: Container(
                 height: 2,
                 decoration: BoxDecoration(
@@ -38,8 +37,7 @@ class PathOrder extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
               ),
             ),
-            SizedBox(
-              width: 100,
+            Expanded(
               child: Container(
                 height: 2,
                 decoration: BoxDecoration(
@@ -77,8 +75,7 @@ class PathOrder extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              width: 100,
+            Expanded(
               child: Container(
                 height: 2,
                 decoration: BoxDecoration(
@@ -97,19 +94,20 @@ class PathOrder extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
         DefaultTextStyle(
           style:
               Theme.of(context).textTheme.bodyText1!.copyWith(color: kGrey300),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text('Placed'),
+              Spacer(),
+              SizedBox(width: 30),
               Text('Preparing'),
-              Text(
-                'On the way',
-                style: TextStyle(color: kBlue400),
-              ),
+              Spacer(),
+              SizedBox(width: 30),
+              Text('On the way', style: TextStyle(color: kBlue400)),
+              Spacer(),
               Text('Delivered'),
             ],
           ),
