@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:walmart_app_design/model/payment.dart';
 
 class PaymentRepository {
-  static List<Payment> loadPayment() {
-    const payments = [
+  static List<Payment> load() {
+    var payments = [
       Payment(
         name: 'World Elite Visa',
         number: '5629 4045 2380',

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:walmart_app_design/constants.dart';
-import 'package:walmart_app_design/main.dart';
 import 'package:walmart_app_design/model/electronic.dart';
+import 'package:walmart_app_design/model/product_model.dart';
 import 'package:walmart_app_design/screens/home/components/track_order/button.dart';
 
 class ElectronicCard extends StatelessWidget {
@@ -122,7 +123,7 @@ class ElectronicCard extends StatelessWidget {
           right: 8,
           top: 8,
           child: InkWell(
-            onTap: () => AppStateWidget.of(context).addToCart(electronic),
+            onTap: () => Provider.of<ProductModel>(context, listen: false).addToCart(electronic),
             child: Button(
               image: Image.asset(
                 'assets/icons/coolicon.png',

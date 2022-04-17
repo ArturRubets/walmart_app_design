@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:walmart_app_design/constants.dart';
-import 'package:walmart_app_design/main.dart';
 import 'package:walmart_app_design/model/product.dart';
+import 'package:walmart_app_design/model/product_model.dart';
 
 class PurchaseForm extends StatelessWidget {
   const PurchaseForm({
@@ -17,8 +18,10 @@ class PurchaseForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var addToCart = AppStateWidget.of(context).addToCart;
-    var removeFromCart = AppStateWidget.of(context).removeFromCart;
+    var productModel = Provider.of<ProductModel>(context, listen: false);
+
+    var addToCart = productModel.addToCart;
+    var removeFromCart = productModel.removeFromCart;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

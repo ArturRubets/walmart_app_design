@@ -1,7 +1,7 @@
 import 'package:walmart_app_design/model/food.dart';
 
 class FoodRepository {
-  static List<Food> loadFoods() {
+  static List<Food> load() {
     const allFoods = [
       Food(
         id: 0,

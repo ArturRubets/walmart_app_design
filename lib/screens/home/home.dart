@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:walmart_app_design/constants.dart';
-import 'package:walmart_app_design/main.dart';
 import 'package:walmart_app_design/model/offers_repository.dart';
+import 'package:walmart_app_design/model/product_model.dart';
 import 'package:walmart_app_design/screens/cart/cart.dart';
 import 'package:walmart_app_design/screens/home/components/body.dart';
 import 'package:walmart_app_design/screens/home/components/my_badge.dart';
@@ -38,7 +39,6 @@ class HomePage extends StatelessWidget {
   }
 
   Row buildAppBar(BuildContext context) {
-    final itemsInCart = AppStateScope.of(context).itemsInCart.length;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -81,26 +81,30 @@ class HomePage extends StatelessWidget {
                     .copyWith(color: kWhite.withOpacity(0.8)),
               ),
               const SizedBox(width: 20),
-              InkWell(
-                onTap: () {
-                  if (itemsInCart > 0) {
-                    Navigator.pushNamed(context, Cart.routeName);
-                  }
-                },
-                borderRadius: BorderRadius.circular(20),
-                child: MyBadge(
-                  top: -6,
-                  right: -6,
-                  color: const Color(0xFFFCB619),
-                  itemsInCart: itemsInCart,
-                  child: Image.asset(
-                    'assets/icons/shopping-cart-outline.png',
-                    width: 24,
-                    height: 24,
-                    color: kWhite,
+              Consumer<ProductModel>(builder: (context, productModel, child) {
+                var quantityProductsInCart =
+                    productModel.quantityProductsInCart();
+                return InkWell(
+                  onTap: () {
+                    if (quantityProductsInCart > 0) {
+                      Navigator.pushNamed(context, Cart.routeName);
+                    }
+                  },
+                  borderRadius: BorderRadius.circular(20),
+                  child: MyBadge(
+                    top: -6,
+                    right: -6,
+                    color: const Color(0xFFFCB619),
+                    itemsInCart: quantityProductsInCart,
+                    child: Image.asset(
+                      'assets/icons/shopping-cart-outline.png',
+                      width: 24,
+                      height: 24,
+                      color: kWhite,
+                    ),
                   ),
-                ),
-              ),
+                );
+              }),
             ],
           ),
         ),

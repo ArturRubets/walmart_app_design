@@ -1,7 +1,7 @@
 import 'package:walmart_app_design/model/electronic.dart';
 
 class ElectronicRepository {
-  static List<Electronic> loadElectronic() {
+  static List<Electronic> load() {
     const allElectronic = [
       Electronic(
         id: 8,

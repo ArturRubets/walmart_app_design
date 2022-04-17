@@ -1,150 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:walmart_app_design/constants.dart';
-import 'package:walmart_app_design/model/app_state.dart';
-import 'package:walmart_app_design/model/electronic_repository.dart';
-import 'package:walmart_app_design/model/food_repository.dart';
-import 'package:walmart_app_design/model/payment.dart';
-import 'package:walmart_app_design/model/payment_repository.dart';
+import 'package:walmart_app_design/model/payment_model.dart';
 import 'package:walmart_app_design/model/product.dart';
+import 'package:walmart_app_design/model/product_model.dart';
 import 'package:walmart_app_design/screens/cart/cart.dart';
 import 'package:walmart_app_design/screens/checkout/checkout.dart';
 import 'package:walmart_app_design/screens/home/components/my_badge.dart';
 import 'package:walmart_app_design/screens/home/home.dart';
 import 'package:walmart_app_design/screens/loyalty_program/loyalty_program.dart';
 import 'package:walmart_app_design/screens/splash/splash.dart';
-import "package:collection/collection.dart";
 
 void main() {
   runApp(
-    const AppStateWidget(
-      child: MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductModel()),
+        ChangeNotifierProvider(create: (_) => PaymentModel()),
+      ],
+      child: const MyApp(),
     ),
   );
-}
-
-class AppStateWidget extends StatefulWidget {
-  const AppStateWidget({
-    required this.child,
-    Key? key,
-  }) : super(key: key);
-
-  final Widget child;
-
-  static _AppStateWidgetState of(BuildContext context) =>
-      context.findAncestorStateOfType<_AppStateWidgetState>()!;
-
-  @override
-  State<AppStateWidget> createState() => _AppStateWidgetState();
-}
-
-class _AppStateWidgetState extends State<AppStateWidget> {
-  AppState _model = AppState(
-    foodList: FoodRepository.loadFoods(),
-    electronicList: ElectronicRepository.loadElectronic(),
-    paymentList: PaymentRepository.loadPayment(),
-  );
-
-  void addToCart(Product product) {
-    final Map<Product, int> newItemsInCart = Map.from(_model.itemsInCart);
-    var quantity = newItemsInCart[product] ?? 0;
-    newItemsInCart[product] = quantity + 1;
-
-    setState(() {
-      _model = _model.copyWith(
-        itemsInCart: newItemsInCart,
-      );
-    });
-  }
-
-  void closeScreenIfEmptyCart(
-      BuildContext context, Map<Product, int> itemsInCart) {
-    if (itemsInCart.isEmpty) {
-      Navigator.of(context).pop();
-    }
-  }
-
-  void removeFromCart(Product product, int count, BuildContext context) {
-    final Map<Product, int> newItemsInCart = Map.from(_model.itemsInCart);
-    var quantity = newItemsInCart[product] ?? 0;
-    if (quantity - count > 0) {
-      newItemsInCart[product] = quantity - count;
-    } else {
-      // none products
-      newItemsInCart.remove(product);
-    }
-
-    setState(() {
-      _model = _model.copyWith(
-        itemsInCart: newItemsInCart,
-      );
-    });
-    closeScreenIfEmptyCart(context, _model.itemsInCart);
-  }
-
-  void clearItemsInCart() {
-    setState(() {
-      _model = _model.copyWith(itemsInCart: {});
-    });
-  }
-
-  void addPayment(
-      {required String name, required String number, List<String>? assetPath}) {
-    if (name.isEmpty) {
-      throw 'Empty name';
-    }
-    if (number.length != 14) {
-      throw 'Invalid value number. Must be 14 characters #### #### #### ####';
-    }
-
-    final List<Payment> newPaymentList = List.from(_model.paymentList);
-    newPaymentList.add(Payment(name: name, number: number));
-    setState(() {
-      _model = _model.copyWith(
-        paymentList: newPaymentList,
-      );
-    });
-  }
-
-  int quantityItemsInCart() => _model.itemsInCart.values.sum;
-
-  int quantityProductsInCart() => _model.itemsInCart.length;
-
-  double calculateSubtotal() {
-    double subtotal = 0;
-    _model.itemsInCart.forEach((key, value) {
-      subtotal += key.price * value;
-    });
-
-    return subtotal;
-  }
-
-  double calcTaxes() => calculateSubtotal() * taxesPercent;
-
-  double calcTotal() => calculateSubtotal() + calcTaxes();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppStateScope(
-      _model,
-      child: widget.child,
-    );
-  }
-}
-
-class AppStateScope extends InheritedWidget {
-  final AppState data;
-  const AppStateScope(
-    this.data, {
-    Key? key,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  static AppState of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<AppStateScope>()!.data;
-
-  @override
-  bool updateShouldNotify(AppStateScope oldWidget) => data != oldWidget.data;
 }
 
 class MyApp extends StatelessWidget {
@@ -156,14 +33,14 @@ class MyApp extends StatelessWidget {
       title: 'Walmart',
       home: const HomePage(),
       initialRoute: '/splash',
-      onGenerateRoute: _getRoute,
+      onGenerateRoute: (settings) => _getRoute(settings, context),
       theme: buildTheme(),
       scrollBehavior: const ConstantScrollBehavior(),
       debugShowCheckedModeBanner: false,
     );
   }
 
-  Route? _getRoute(RouteSettings settings) {
+  Route? _getRoute(RouteSettings settings, BuildContext context) {
     if (settings.name == SplashPage.routeName) {
       return MaterialPageRoute(
         builder: ((context) =>
@@ -173,7 +50,7 @@ class MyApp extends StatelessWidget {
 
     if (settings.name == Cart.routeName) {
       return MaterialPageRoute(
-        builder: (context) => Cart(),
+        builder: (context) => const Cart(),
       );
     }
 
@@ -191,14 +68,12 @@ class MyApp extends StatelessWidget {
     }
 
     if (settings.name == HomePage.routeName) {
-      final context = settings.arguments;
-      if (context != null) {
-        // to reset items in cart
-        AppStateWidget.of(context as BuildContext).clearItemsInCart();
+      final isClearCart = settings.arguments as bool;
+      if (isClearCart) {
+        // remove items in cart
+        Provider.of<ProductModel>(context, listen: false).clearItemsInCart();
       }
-      return MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      );
+      return MaterialPageRoute(builder: (context) => const HomePage());
     }
     assert(false, 'Need to implement ${settings.name}');
     return null;
@@ -206,7 +81,6 @@ class MyApp extends StatelessWidget {
 }
 
 Row buildAppBar(BuildContext context) {
-  final productsInCart = AppStateWidget.of(context).quantityProductsInCart();
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -249,31 +123,34 @@ Row buildAppBar(BuildContext context) {
                   .copyWith(color: kWhite.withOpacity(0.8)),
             ),
             const SizedBox(width: 20),
-            InkWell(
-              onTap: () {
-                if (productsInCart > 0) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: ((context) => Cart()),
-                    ),
-                  );
-                }
-              },
-              borderRadius: BorderRadius.circular(20),
-              child: MyBadge(
-                top: -6,
-                right: -6,
-                color: const Color(0xFFFCB619),
-                itemsInCart: productsInCart,
-                child: Image.asset(
-                  'assets/icons/shopping-cart-outline.png',
-                  width: 24,
-                  height: 24,
-                  color: kWhite,
+            Consumer<ProductModel>(builder: (context, product, child) {
+              final productsInCart = product.quantityProductsInCart();
+              return InkWell(
+                onTap: () {
+                  if (productsInCart > 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => const Cart()),
+                      ),
+                    );
+                  }
+                },
+                borderRadius: BorderRadius.circular(20),
+                child: MyBadge(
+                  top: -6,
+                  right: -6,
+                  color: const Color(0xFFFCB619),
+                  itemsInCart: productsInCart,
+                  child: Image.asset(
+                    'assets/icons/shopping-cart-outline.png',
+                    width: 24,
+                    height: 24,
+                    color: kWhite,
+                  ),
                 ),
-              ),
-            ),
+              );
+            }),
           ],
         ),
       ),
