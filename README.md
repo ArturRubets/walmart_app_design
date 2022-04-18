@@ -1,7 +1,15 @@
 # walmart_app_design
 
-A new Flutter project.
-Application design: https://www.figma.com/file/tt8r0RQ81DpLkJ8fX4dav7/%F0%9F%9B%8D-Walmart-App-Design-(Community)?node-id=0%3A1
+The project is made on the design in figma: https://www.figma.com/file/tt8r0RQ81DpLkJ8fX4dav7/%F0%9F%9B%8D-Walmart-App-Design-(Community)?node-id=0%3A1
+
+Samples:
+![](images/1_main_screen.png)
+
+![](images/2_cart_screen.png)
+
+![](images/3_checkout_screen.png)
+
+![](images/4_loyalty_screen.png)
 
 ## Getting Started
 
