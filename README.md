@@ -3,13 +3,18 @@
 The project is made on the design in figma: https://www.figma.com/file/tt8r0RQ81DpLkJ8fX4dav7/%F0%9F%9B%8D-Walmart-App-Design-(Community)?node-id=0%3A1
 
 Samples:
-![](images/1_main_screen.png)
-
-![](images/2_cart_screen.png)
-
-![](images/3_checkout_screen.png)
-
-![](images/4_loyalty_screen.png)
+<p align="left">
+  <img src="images/1_main_screen.png" width="25%" height="25%">
+</p>
+<p align="left">
+  <img src="images/2_cart_screen.png" width="25%" height="25%">
+</p>
+<p align="left">
+  <img src="images/3_checkout_screen.png" width="25%" height="25%">
+</p>
+<p align="left">
+  <img src="images/4_loyalty_screen.png" width="25%" height="25%">
+</p>
 
 ## Getting Started
 
