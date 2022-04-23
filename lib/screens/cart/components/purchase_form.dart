@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/controllers/productController.dart';
 import 'package:walmart_app_design/model/product.dart';
-import 'package:walmart_app_design/model/product_model.dart';
 
 class PurchaseForm extends StatelessWidget {
   const PurchaseForm({
     Key? key,
     required this.product,
-    required this.quantity,
-    required this.index,
   }) : super(key: key);
 
   final Product product;
-  final int quantity;
-  final int index;
 
   @override
   Widget build(BuildContext context) {
-    var productModel = Provider.of<ProductModel>(context, listen: false);
-
+    var productModel = ProductController.to;
     var addToCart = productModel.addToCart;
     var removeFromCart = productModel.removeFromCart;
     return Column(
@@ -86,7 +81,12 @@ class PurchaseForm extends StatelessWidget {
             Row(
               children: [
                 InkWell(
-                  onTap: (() => removeFromCart(product, quantity, context)),
+                  onTap: () => removeFromCart(
+                      product,
+                      ProductController.to
+                          .quantityItemsInCartByProduct(product)
+                          .value,
+                      context),
                   child: Text(
                     'Remove',
                     style: Theme.of(context).textTheme.headline3!.copyWith(
@@ -124,13 +124,15 @@ class PurchaseForm extends StatelessWidget {
                     icon: const Icon(Icons.remove),
                     splashRadius: 15,
                   ),
-                  Text(
-                    '$quantity',
-                    style: Theme.of(context).textTheme.headline1!.copyWith(
-                          color: kBlack600,
-                          fontWeight: FontWeight.w400,
-                        ),
-                  ),
+                  Obx(() {
+                    return Text(
+                      '${ProductController.to.quantityItemsInCartByProduct(product)}',
+                      style: Theme.of(context).textTheme.headline1!.copyWith(
+                            color: kBlack600,
+                            fontWeight: FontWeight.w400,
+                          ),
+                    );
+                  }),
                   IconButton(
                     onPressed: () => addToCart(product),
                     icon: const Icon(Icons.add),

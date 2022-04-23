@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:walmart_app_design/common/rounded_button.dart';
 import 'package:walmart_app_design/common/shipping_address.dart';
 import 'package:walmart_app_design/common/summary.dart';
+import 'package:walmart_app_design/controllers/productController.dart';
 import 'package:walmart_app_design/model/product.dart';
 import 'package:walmart_app_design/common/header_cart.dart';
-import 'package:walmart_app_design/model/product_model.dart';
 import 'package:walmart_app_design/screens/cart/components/purchase_form.dart';
 import 'package:walmart_app_design/screens/checkout/checkout.dart';
 
@@ -14,25 +14,26 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var productModel = Provider.of<ProductModel>(context);
-
-    final quantityItemsInCart = productModel.quantityItemsInCart();
-    final itemsInCart = productModel.itemsInCart;
-    var subtotal = productModel.calculateSubtotal().toStringAsFixed(2);
-    var taxes = productModel.calcTaxes().toStringAsFixed(2);
-    var total = productModel.calcTotal().toStringAsFixed(2);
+    final itemsInCart = ProductController.to.itemsInCart;
     return Column(
       children: [
-        HeaderCart(title: 'Cart', itemsInCart: quantityItemsInCart),
+        Obx(
+          () => HeaderCart(
+            title: 'Cart',
+            itemsInCart: ProductController.to.quantityItemsInCart().value,
+          ),
+        ),
         const ShippingAddress(),
         ...generatePurchases(itemsInCart),
         const SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Summary(
-            subtotal: subtotal,
-            taxes: taxes,
-            total: total,
+          child: Obx(
+            () => Summary(
+              subtotal: ProductController.to.calculateSubtotal().toStringAsFixed(2),
+              taxes: ProductController.to.calcTaxes().toStringAsFixed(2),
+              total: ProductController.to.calcTotal().toStringAsFixed(2),
+            ),
           ),
         ),
         _buildButtonContinueToCheckout(context, itemsInCart),
@@ -42,7 +43,6 @@ class Body extends StatelessWidget {
 
   List<Widget> generatePurchases(Map<Product, int> items) {
     var products = items.keys;
-    var quantityProducts = items.values;
     return List.generate(items.length, (index) {
       return Padding(
         padding: const EdgeInsets.only(
@@ -53,8 +53,6 @@ class Body extends StatelessWidget {
         ),
         child: PurchaseForm(
           product: products.elementAt(index),
-          quantity: quantityProducts.elementAt(index),
-          index: index,
         ),
       );
     });

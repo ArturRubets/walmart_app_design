@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/controllers/productController.dart';
 import 'package:walmart_app_design/model/offer.dart';
-import 'package:walmart_app_design/model/product_model.dart';
 import 'package:walmart_app_design/screens/home/components/brands.dart';
 import 'package:walmart_app_design/screens/home/components/card_top_offer.dart';
 import 'package:walmart_app_design/screens/home/components/electronic_card.dart';
@@ -76,7 +75,7 @@ class Body extends StatelessWidget {
   }
 
   List<Widget> buildFoodGroseriesSection(BuildContext context) {
-    var foodList = Provider.of<ProductModel>(context, listen: false).food;
+    var foodList = ProductController.to.food;
     return [
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
@@ -106,8 +105,7 @@ class Body extends StatelessWidget {
   }
 
   List<Widget> buildElectronicsGroseriesSection(BuildContext context) {
-    var electronicList =
-        Provider.of<ProductModel>(context, listen: false).electronic;
+    var electronicList = ProductController.to.electronic;
     return [
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),

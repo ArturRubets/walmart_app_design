@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/model/electronic.dart';
 import 'package:walmart_app_design/model/electronic_repository.dart';
 import 'package:walmart_app_design/model/food.dart';
 import 'package:walmart_app_design/model/food_repository.dart';
 import 'package:walmart_app_design/model/product.dart';
-import "package:collection/collection.dart";
+import 'package:collection/collection.dart';
 
-class ProductModel extends ChangeNotifier {
-  final List<Food> _food = FoodRepository.load();
-  final List<Electronic> _electronic = ElectronicRepository.load();
-  final Map<Product, int> _itemsInCart = {};
+class ProductController extends GetxController {
+  static ProductController get to => Get.find();
+  final _food = FoodRepository.load();
+  final _electronic = ElectronicRepository.load();
+  final _itemsInCart = <Product, int>{}.obs;
 
   UnmodifiableListView<Food> get food => UnmodifiableListView(_food);
   UnmodifiableListView<Electronic> get electronic =>
@@ -22,8 +24,7 @@ class ProductModel extends ChangeNotifier {
     int? quantity = _itemsInCart[product] ?? 0;
     quantity += 1;
     _itemsInCart.addAll({product: quantity});
-
-    notifyListeners();
+    update();
   }
 
   void removeFromCart(Product product, int count, BuildContext context) {
@@ -36,7 +37,6 @@ class ProductModel extends ChangeNotifier {
       _itemsInCart.remove(product);
     }
     closeScreenIfEmptyCart(context);
-    notifyListeners();
   }
 
   void closeScreenIfEmptyCart(BuildContext context) {
@@ -47,12 +47,13 @@ class ProductModel extends ChangeNotifier {
 
   void clearItemsInCart() {
     _itemsInCart.clear();
-    notifyListeners();
   }
 
-  int quantityItemsInCart() => _itemsInCart.values.sum;
+  RxInt quantityItemsInCart() => _itemsInCart.values.sum.obs;
 
-  int quantityProductsInCart() => _itemsInCart.length;
+  RxInt quantityItemsInCartByProduct(Product product) => (_itemsInCart[product] ?? 0).obs;
+
+  RxInt quantityProductsInCart() => _itemsInCart.length.obs;
 
   double calculateSubtotal() {
     double subtotal = 0;

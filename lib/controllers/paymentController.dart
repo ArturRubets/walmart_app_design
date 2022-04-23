@@ -1,11 +1,11 @@
 import 'dart:collection';
-
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:walmart_app_design/model/payment.dart';
 import 'package:walmart_app_design/model/payment_repository.dart';
 
-class PaymentModel extends ChangeNotifier {
-  final List<Payment> _payment = PaymentRepository.load();
+class PaymentController extends GetxController {
+  static PaymentController get to => Get.find();
+  final _payment = PaymentRepository.load().obs;
   UnmodifiableListView<Payment> get payment => UnmodifiableListView(_payment);
 
   void addPayment(
@@ -18,6 +18,5 @@ class PaymentModel extends ChangeNotifier {
     }
     var newPayment = Payment(name: name, number: number);
     _payment.add(newPayment);
-    notifyListeners();
   }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:walmart_app_design/common/header_cart.dart';
 import 'package:walmart_app_design/common/rounded_button.dart';
 import 'package:walmart_app_design/common/shipping_address.dart';
 import 'package:walmart_app_design/common/summary.dart';
+import 'package:walmart_app_design/controllers/productController.dart';
 import 'package:walmart_app_design/model/product.dart';
-import 'package:walmart_app_design/model/product_model.dart';
 import 'package:walmart_app_design/screens/checkout/components/item.dart';
 import 'package:walmart_app_design/screens/checkout/components/payment_method.dart';
 import 'package:walmart_app_design/screens/loyalty_program/loyalty_program.dart';
@@ -18,10 +17,10 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     var products = itemsInCart.keys;
 
-    var productModel = Provider.of<ProductModel>(context, listen: false);
-    var subtotal = productModel.calculateSubtotal().toStringAsFixed(2);
-    var taxes = productModel.calcTaxes().toStringAsFixed(2);
-    var total = productModel.calcTotal().toStringAsFixed(2);
+    var productController = ProductController.to;
+    var subtotal = productController.calculateSubtotal().toStringAsFixed(2);
+    var taxes = productController.calcTaxes().toStringAsFixed(2);
+    var total = productController.calcTotal().toStringAsFixed(2);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
