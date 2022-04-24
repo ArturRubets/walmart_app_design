@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/route_manager.dart';
 import 'package:walmart_app_design/common/rounded_button.dart';
 import 'package:walmart_app_design/common/shipping_address.dart';
 import 'package:walmart_app_design/common/summary.dart';
@@ -24,13 +25,14 @@ class Body extends StatelessWidget {
           ),
         ),
         const ShippingAddress(),
-        ...generatePurchases(itemsInCart),
+        generatePurchases(),
         const SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Obx(
             () => Summary(
-              subtotal: ProductController.to.calculateSubtotal().toStringAsFixed(2),
+              subtotal:
+                  ProductController.to.calculateSubtotal().toStringAsFixed(2),
               taxes: ProductController.to.calcTaxes().toStringAsFixed(2),
               total: ProductController.to.calcTotal().toStringAsFixed(2),
             ),
@@ -41,19 +43,25 @@ class Body extends StatelessWidget {
     );
   }
 
-  List<Widget> generatePurchases(Map<Product, int> items) {
-    var products = items.keys;
-    return List.generate(items.length, (index) {
-      return Padding(
-        padding: const EdgeInsets.only(
-          top: 32,
-          left: 16,
-          right: 16,
-          bottom: 20,
-        ),
-        child: PurchaseForm(
-          product: products.elementAt(index),
-        ),
+  Widget generatePurchases() {
+    return Obx(() {
+      var products = ProductController.to.itemsInCart.keys;
+      return Column(
+        children: [
+          ...List.generate(products.length, (index) {
+            return Padding(
+              padding: const EdgeInsets.only(
+                top: 32,
+                left: 16,
+                right: 16,
+                bottom: 20,
+              ),
+              child: PurchaseForm(
+                product: products.elementAt(index),
+              ),
+            );
+          }),
+        ],
       );
     });
   }
@@ -66,11 +74,7 @@ class Body extends StatelessWidget {
         vertical: 40,
       ),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(
-          context,
-          Checkout.routeName,
-          arguments: itemsInCart,
-        ),
+        onTap: () => Get.toNamed(Checkout.routeName, arguments: itemsInCart),
         child: const RoundedButton(
           text: 'Continue to checkout',
         ),

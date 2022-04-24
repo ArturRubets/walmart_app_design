@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:walmart_app_design/constants.dart';
 import 'package:walmart_app_design/controllers/paymentController.dart';
 import 'package:walmart_app_design/model/payment.dart';
@@ -150,7 +151,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
   void _cancel() {
     _controllerNameCard.clear();
     _controllerNumberCard.clear();
-    Navigator.of(context).pop();
+    Get.back();
   }
 
   void _submit() {
@@ -162,7 +163,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           PaymentController.to.addPayment(name: nameCard, number: numberCard);
           _controllerNameCard.clear();
           _controllerNumberCard.clear();
-          Navigator.of(context).pop();
+          Get.back();
         }
       });
     } catch (e) {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/route_manager.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/controllers/paymentController.dart';
 import 'package:walmart_app_design/controllers/productController.dart';
 import 'package:walmart_app_design/model/offers_repository.dart';
 import 'package:walmart_app_design/screens/cart/cart.dart';
@@ -11,7 +13,7 @@ import 'package:walmart_app_design/screens/home/components/my_badge.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  static const routeName = '/home';
+  static const routeName = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class HomePage extends StatelessWidget {
                 return InkWell(
                   onTap: () {
                     if (quantityItemsInCart > 0) {
-                      Navigator.pushNamed(context, Cart.routeName);
+                      Get.toNamed(Cart.routeName);
                     }
                   },
                   borderRadius: BorderRadius.circular(20),

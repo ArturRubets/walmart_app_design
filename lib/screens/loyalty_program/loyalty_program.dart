@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:walmart_app_design/constants.dart';
+import 'package:walmart_app_design/controllers/productController.dart';
 import 'package:walmart_app_design/screens/home/home.dart';
 
 class LoyaltyProgram extends StatelessWidget {
@@ -70,12 +72,10 @@ class LoyaltyProgram extends StatelessWidget {
               ),
               const SizedBox(height: 41),
               OutlinedButton(
-                onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  HomePage.routeName,
-                  (route) => false,
-                  arguments: true,
-                ),
+                onPressed: () {
+                  ProductController.to.clearItemsInCart();
+                  Get.offAllNamed(HomePage.routeName);
+                },
                 child: const Text(
                   'CONTINUE',
                   style: TextStyle(

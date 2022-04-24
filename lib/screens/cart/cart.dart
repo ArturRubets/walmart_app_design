@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/route_manager.dart';
 import 'package:walmart_app_design/screens/cart/components/body.dart';
 
 class Cart extends StatelessWidget {
@@ -65,7 +66,7 @@ Row buildAppBar(BuildContext context) {
         child: Align(
           alignment: Alignment.centerRight,
           child: IconButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Get.back(),
             icon: Image.asset(
               'assets/icons/plus_circle_outline.png',
               width: 24,

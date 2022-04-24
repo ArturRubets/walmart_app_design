@@ -85,8 +85,7 @@ class PurchaseForm extends StatelessWidget {
                       product,
                       ProductController.to
                           .quantityItemsInCartByProduct(product)
-                          .value,
-                      context),
+                          .value),
                   child: Text(
                     'Remove',
                     style: Theme.of(context).textTheme.headline3!.copyWith(
@@ -119,7 +118,7 @@ class PurchaseForm extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      removeFromCart(product, 1, context);
+                      removeFromCart(product, 1);
                     },
                     icon: const Icon(Icons.remove),
                     splashRadius: 15,

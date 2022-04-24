@@ -27,7 +27,7 @@ class ProductController extends GetxController {
     update();
   }
 
-  void removeFromCart(Product product, int count, BuildContext context) {
+  void removeFromCart(Product product, int count) {
     int? key = _itemsInCart[product];
     var quantity = key ?? 0;
     if (quantity - count > 0) {
@@ -36,12 +36,12 @@ class ProductController extends GetxController {
       // if there are no products then delete
       _itemsInCart.remove(product);
     }
-    closeScreenIfEmptyCart(context);
+    closeScreenIfEmptyCart();
   }
 
-  void closeScreenIfEmptyCart(BuildContext context) {
+  void closeScreenIfEmptyCart() {
     if (_itemsInCart.isEmpty) {
-      Navigator.of(context).pop();
+      Get.back();
     }
   }
 
@@ -51,7 +51,8 @@ class ProductController extends GetxController {
 
   RxInt quantityItemsInCart() => _itemsInCart.values.sum.obs;
 
-  RxInt quantityItemsInCartByProduct(Product product) => (_itemsInCart[product] ?? 0).obs;
+  RxInt quantityItemsInCartByProduct(Product product) =>
+      (_itemsInCart[product] ?? 0).obs;
 
   RxInt quantityProductsInCart() => _itemsInCart.length.obs;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:walmart_app_design/common/header_cart.dart';
 import 'package:walmart_app_design/common/rounded_button.dart';
 import 'package:walmart_app_design/common/shipping_address.dart';
@@ -68,7 +69,7 @@ class Body extends StatelessWidget {
         vertical: 40,
       ),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, LoyaltyProgram.routeName),
+        onTap: () => Get.toNamed(LoyaltyProgram.routeName),
         child: const RoundedButton(
           text: 'Continue 👉',
         ),
